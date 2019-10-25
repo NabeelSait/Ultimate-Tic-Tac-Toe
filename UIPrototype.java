@@ -5,20 +5,33 @@ public class UIPrototype extends JFrame
 {
     JButton [][] buttons= new JButton[3][3];
     JTextField statusBar;
-    GamePanel panel;
     Integer turn;
     Integer count;
 
     public UIPrototype()
     {
-      setLayout(new GridLayout(3,3));
+      setLayout(new GridBagLayout());
+      GridBagConstraints c = new GridBagConstraints();
       GameBoard gB = new GameBoard();
 
-      add(gB);
-      setTitle("Tic Tac Toe!");
+      c.gridx = 0;
+      c.gridy = 0;
+      c.anchor = GridBagConstraints.NORTHWEST;
+      add(gB,c);
+
+      statusBar=new JTextField("Player1's Turn");
+      statusBar.setEditable(false);
+      c.gridx = 0;
+      c.gridy = 1;
+      c.anchor = GridBagConstraints.CENTER;
+      add(statusBar,c);
+
+      setTitle("Tic Tac Toe");
       setVisible(true);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      setBounds(500,500,400,400);
     }
+
     public class GamePanel extends JPanel
     {
         public GamePanel()
@@ -33,6 +46,7 @@ public class UIPrototype extends JFrame
                 }
              }
              setBorder(BorderFactory.createMatteBorder(1,1,1,1,Color.black));
+             setPreferredSize(new Dimension(100,100));
          }
     }
     public class GameBoard extends JPanel
