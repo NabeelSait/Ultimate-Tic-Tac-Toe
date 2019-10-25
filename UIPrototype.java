@@ -5,8 +5,6 @@ public class UIPrototype extends JFrame
 {
     JButton [][] buttons= new JButton[3][3];
     JTextField statusBar;
-    Integer turn;
-    Integer count;
 
     public UIPrototype()
     {
