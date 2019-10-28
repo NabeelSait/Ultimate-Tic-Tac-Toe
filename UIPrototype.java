@@ -5,6 +5,7 @@ public class UIPrototype extends JFrame
 {
     JButton [][] buttons= new JButton[3][3];
     JTextField statusBar;
+    JButton fButton;
 
     public UIPrototype()
     {
@@ -24,7 +25,12 @@ public class UIPrototype extends JFrame
       c.anchor = GridBagConstraints.CENTER;
       add(statusBar,c);
 
-      setTitle("Tic Tac Toe");
+      fButton = new JButton("Forfeit");
+      c.gridx = 0;
+      c.gridy = 2;
+      add(fButton, c);
+
+      setTitle("Ultimate Tic Tac Toe");
       setVisible(true);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(500,500,400,400);

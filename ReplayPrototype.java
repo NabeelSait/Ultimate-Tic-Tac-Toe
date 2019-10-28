@@ -19,6 +19,7 @@ public class ReplayPrototype extends UIPrototype
       GridBagConstraints c = new GridBagConstraints();
       c.gridx = 0;
       c.gridy = 2;
+      remove(fButton);
       add(bPanel, c);
 
       setTitle("Replay");

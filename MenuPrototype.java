@@ -8,7 +8,7 @@ public class MenuPrototype extends JFrame
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
 
-      JTextField title = new JTextField("Tic Tac Toe Squared");
+      JTextField title = new JTextField("Ultimate Tic Tac Toe");
       title.setEditable(false);
       title.setFont(new Font("Serif", Font.BOLD, 20));
       title.setBorder(BorderFactory.createEmptyBorder());
