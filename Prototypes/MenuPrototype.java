@@ -3,12 +3,15 @@ import java.awt.*;
 
 public class MenuPrototype extends JFrame
 {
+   JButton vsCPU, vsP, replay;
+   JTextField title;
+
    public MenuPrototype()
    {
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
 
-      JTextField title = new JTextField("Ultimate Tic Tac Toe");
+      title = new JTextField("Ultimate Tic Tac Toe");
       title.setEditable(false);
       title.setFont(new Font("Serif", Font.BOLD, 20));
       title.setBorder(BorderFactory.createEmptyBorder());
@@ -19,21 +22,21 @@ public class MenuPrototype extends JFrame
 
       add(title,c);
 
-      JButton vsCPU = new JButton("   Play Against a Computer   ");
+      vsCPU = new JButton("   Play Against a Computer   ");
 
       c.gridx = 0;
       c.gridy = 1;
 
       add(vsCPU, c);
 
-      JButton vsP = new JButton("Play Against another Player");
+      vsP = new JButton("Play Against another Player");
 
       c.gridx = 0;
       c.gridy = 2;
 
       add(vsP, c);
 
-      JButton replay = new JButton("           Watch a Replay           ");
+      replay = new JButton("           Watch a Replay           ");
 
       c.gridx = 0;
       c.gridy = 3;

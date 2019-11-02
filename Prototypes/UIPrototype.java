@@ -3,7 +3,6 @@ import java.awt.*;
 
 public class UIPrototype extends JFrame
 {
-    JButton [][] buttons= new JButton[3][3];
     JTextField statusBar;
     JButton fButton;
 
@@ -38,6 +37,7 @@ public class UIPrototype extends JFrame
 
     public class GamePanel extends JPanel
     {
+        JButton [][] buttons= new JButton[3][3];
         public GamePanel()
         {
             setLayout(new GridLayout(3,3));
@@ -55,35 +55,36 @@ public class UIPrototype extends JFrame
     }
     public class GameBoard extends JPanel
     {
+      GamePanel topLeft, topMid, topRight, midLeft, midMid, midRight, botLeft, botMid, botRight;
       public GameBoard()
       {
          setLayout(new GridLayout(3,3,0,0));
 
-         GamePanel topLeft = new GamePanel();
+         topLeft = new GamePanel();
          add(topLeft);
 
-         GamePanel topMid = new GamePanel();
+         topMid = new GamePanel();
          add(topMid);
 
-         GamePanel topRight = new GamePanel();
+         topRight = new GamePanel();
          add(topRight);
 
-         GamePanel midLeft = new GamePanel();
+         midLeft = new GamePanel();
          add(midLeft);
 
-         GamePanel midMid = new GamePanel();
+         midMid = new GamePanel();
          add(midMid);
 
-         GamePanel midRight = new GamePanel();
+         midRight = new GamePanel();
          add(midRight);
 
-         GamePanel botLeft = new GamePanel();
+         botLeft = new GamePanel();
          add(botLeft);
 
-         GamePanel botMid = new GamePanel();
+         botMid = new GamePanel();
          add(botMid);
 
-         GamePanel botRight = new GamePanel();
+         botRight = new GamePanel();
          add(botRight);
       }
     }

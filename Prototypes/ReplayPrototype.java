@@ -3,16 +3,18 @@ import java.awt.*;
 
 public class ReplayPrototype extends UIPrototype
 {
+   JPanel bPanel;
+   JButton nxtB, prevB;
    public ReplayPrototype()
    {
       super();
 
-      JPanel bPanel = new JPanel();
+      bPanel = new JPanel();
 
       bPanel.setLayout(new BorderLayout());
 
-      JButton nxtB = new JButton("Next Turn");
-      JButton prevB = new JButton("Previous Turn");
+      nxtB = new JButton("Next Turn");
+      prevB = new JButton("Previous Turn");
       bPanel.add(prevB, BorderLayout.LINE_START);
       bPanel.add(nxtB, BorderLayout.LINE_END);
 
