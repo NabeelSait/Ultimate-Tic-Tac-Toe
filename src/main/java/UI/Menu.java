@@ -1,10 +1,16 @@
+package UI;
+
+import com.google.common.eventbus.EventBus;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class Menu extends JFrame
-{
-   public Menu()
-   {
+class Menu extends JPanel {
+   private EventBus _bus;
+
+   Menu(EventBus bus) {
+      _bus = bus;
+
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
 
@@ -19,30 +25,31 @@ public class Menu extends JFrame
 
       add(title,c);
 
-      JButton vsCPU = new JButton("   Play Against a Computer   ");
+      final JButton vsCPU = new JButton("   Play Against a Computer   ");
+      vsCPU.addActionListener(e -> _bus.post(vsCPU));
 
       c.gridx = 0;
       c.gridy = 1;
 
       add(vsCPU, c);
 
-      JButton vsP = new JButton("Play Against another Player");
+      final JButton vsP = new JButton("Play Against another Player");
+      vsP.addActionListener(e -> _bus.post(vsP));
 
       c.gridx = 0;
       c.gridy = 2;
 
       add(vsP, c);
 
-      JButton replay = new JButton("           Watch a Replay           ");
+      final JButton replay = new JButton("           Watch a Replay           ");
+      replay.addActionListener(e -> _bus.post(replay));
 
       c.gridx = 0;
       c.gridy = 3;
 
       add(replay, c);
 
-      setTitle("Menu");
       setVisible(true);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(400,400,300,300);
    }
 }

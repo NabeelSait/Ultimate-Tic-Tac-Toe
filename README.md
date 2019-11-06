@@ -8,6 +8,11 @@ This project aims to implement and ship a desktop version of [Ultimate Tic Tac T
 ## Installation guide
 ```git clone http://git.cs.slu.edu/courses/fall19/csci_2300/team_1.git```
 
+In your IDE, import project from sources, and then select the Maven option
+In File -> Settings -> Build, Execution, Deployment -> Compiler -> Java Compiler, change Project Byte-code version to 12. 
+In File -> Project Structure -> Project, change the Project language level to 12.
+In File -> Project Structure -> Modules, change the language level to 12.
+
 ## Requirements
   - Java 8
 
