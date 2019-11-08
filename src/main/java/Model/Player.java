@@ -1,6 +1,6 @@
 package Model;
 
-public class Player {
+public abstact class Player {
     private char type;
     private int number;
 
@@ -16,5 +16,5 @@ public class Player {
     public int getNumber() {
         return 5;
     }
-}
 
+}
