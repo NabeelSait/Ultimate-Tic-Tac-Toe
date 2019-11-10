@@ -3,7 +3,7 @@ package Model;
 public class Replayer
 {
    private ArrayList<String> _moveList;
-   private GameBoard _replayBoard;
+   private ReplayScreen _replayScreen;
 
    public Replayer(String filePath)
    {

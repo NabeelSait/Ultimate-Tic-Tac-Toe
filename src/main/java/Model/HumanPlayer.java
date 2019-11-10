@@ -17,6 +17,10 @@ public class HumanPlayer extends Player {
         return name;
     }
 
+    public int takeTurn()
+    {
+      return 0;
+    }
+
 
 }//end class
-

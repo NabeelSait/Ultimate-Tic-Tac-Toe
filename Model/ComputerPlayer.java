@@ -6,4 +6,9 @@ public class ComputerPlayer extends Player
    }
 
    public int calculateMove() {}
+
+   public int takeTurn()
+   {
+      return 0;
+   }
 }

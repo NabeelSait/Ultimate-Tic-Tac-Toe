@@ -2,6 +2,8 @@ package Model;
 
 public class GameBoardModel implements GameModel {
     private GamePanelModel[] boards;
+    private Player _player1;
+    private Player _player2;
 
     private static class GamePanelModel {
         GamePanelModel() {

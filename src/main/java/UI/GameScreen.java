@@ -8,6 +8,7 @@ import java.awt.*;
 class GameScreen extends JPanel {
     private JTextField _statusBar;
     private EventBus _bus;
+    protected JButton forfeitButton;
 
     GameScreen(EventBus bus) {
         _bus = bus;
@@ -27,10 +28,12 @@ class GameScreen extends JPanel {
         c.anchor = GridBagConstraints.CENTER;
         add(_statusBar, c);
 
-        JButton forfeitButton = new JButton("Forfeit");
+        forfeitButton = new JButton("Forfeit");
         forfeitButton.addActionListener(e -> _bus.post(forfeitButton));
         c.gridx = 0;
         c.gridy = 2;
         add(forfeitButton, c);
     }
+
+
 }
