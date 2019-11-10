@@ -8,6 +8,8 @@ import javax.swing.*;
 public class Game extends JFrame {
     private Menu _menu;
     private GameScreen _gameScreen;
+    private ReplayScreen _replayScreen;
+    private FileManager _fileManager;
 
     public Game() {
         EventBus eventBus = new EventBus();
