@@ -13,7 +13,7 @@ public class GameBoard extends JPanel {
         setLayout(new GridLayout(3, 3, 10, 10));
         GamePanel[] _boards = new GamePanel[9];
         for (int i = 0; i < 9; i++) {
-            _boards[i] = new GamePanel();
+            _boards[i] = new GamePanel(e, i);
             add(_boards[i]);
         }
     }
