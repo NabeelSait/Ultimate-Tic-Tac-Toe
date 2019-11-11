@@ -13,6 +13,10 @@ In File -> Settings -> Build, Execution, Deployment -> Compiler -> Java Compiler
 In File -> Project Structure -> Project, change the Project language level to 12.
 In File -> Project Structure -> Modules, change the language level to 12.
 
+## Compiling and Running
+
+```mvn clean install``
+
 ## Requirements
   - Java 8
 
