@@ -53,4 +53,7 @@ public class Game extends JFrame {
             setMenuCharacteristics();
         }
     }
+
+    @Suscribe
+    public void endGame(EndGameEvent) {}
 }

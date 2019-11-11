@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class Replayer
 {
-   private ArrayList<String> _moveList;
+   private ArrayList<Move> _moveList;
    private ReplayScreen _replayScreen;
 
    public Replayer(String filePath)
    {
-      _moveList = new ArrayList<String>();
+      _moveList = new ArrayList<Move>();
    }
 
    public void nextMove() {}

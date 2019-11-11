@@ -5,6 +5,7 @@ import java.awt.*;
 
 class GamePanel extends JPanel {
     private JButton[] _buttons = new JButton[9];
+    private GamePanelModel _model;
 
     GamePanel() {
         setLayout(new GridLayout(3, 3, 5, 5));
@@ -16,5 +17,3 @@ class GamePanel extends JPanel {
         setPreferredSize(new Dimension(200, 200));
     }
 }
-
-

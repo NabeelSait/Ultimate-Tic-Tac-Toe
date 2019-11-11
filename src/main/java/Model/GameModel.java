@@ -5,4 +5,3 @@ public interface GameModel {
 
     void fillSquare(Player player);
 }
-

@@ -11,13 +11,13 @@ public class FileManager extends JFrame
       JFileChooser c = new JFileChooser();
    }
 
-   public int saveReplay()
+   public int saveReplay(ArrayList<Move> moveList)
    {
       return 0;
    }
 
-   public int openReplay()
+   public String openReplay()
    {
-      return 0;
+      return "String";
    }
 }
