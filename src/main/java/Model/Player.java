@@ -1,12 +1,12 @@
 package Model;
 
-public abstact class Player {
-    protected char type;
-    protected int number;
+public abstract class Player {
+    private static char type;
+    private static int number;
 
     public Player(char t, int n) {
-        this.type = t;
-        this.number = n;
+        type = t;
+        number = n;
     }
 
     public char getType() {
@@ -17,6 +17,6 @@ public abstact class Player {
         return 5;
     }
 
-    public abstract int takeTurn();
+    public abstract Move takeTurn();
 
 }

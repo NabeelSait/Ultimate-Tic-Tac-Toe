@@ -8,7 +8,7 @@ import java.awt.*;
 class GameScreen extends JPanel {
     private JTextField _statusBar;
     private EventBus _bus;
-    protected JButton forfeitButton;
+    private JButton forfeitButton;
 
     GameScreen(EventBus bus) {
         _bus = bus;
@@ -34,6 +34,4 @@ class GameScreen extends JPanel {
         c.gridy = 2;
         add(forfeitButton, c);
     }
-
-
 }

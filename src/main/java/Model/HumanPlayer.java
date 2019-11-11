@@ -17,9 +17,9 @@ public class HumanPlayer extends Player {
         return name;
     }
 
-    public int takeTurn()
+    public Move takeTurn()
     {
-      return 0;
+      return new Move(0,0);
     }
 
 

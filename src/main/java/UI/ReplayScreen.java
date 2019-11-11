@@ -1,12 +1,16 @@
 package UI;
 
+import com.google.common.eventbus.EventBus;
+
+import javax.swing.*;
+
 public class ReplayScreen extends GameScreen
 {
-   private JButton _nextturn;
-   private JButton _prevturn;
+   private JButton _next;
+   private JButton _prev;
 
-   public ReplayScreen()
+   public ReplayScreen(EventBus bus)
    {
-      super();
+      super(bus);
    }
 }

@@ -1,12 +1,13 @@
 package UI;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class FileManager extends JFrame
 {
    public FileManager()
    {
-      setLayout(new BorderLayout);
+      setLayout(new BorderLayout());
       JFileChooser c = new JFileChooser();
    }
 

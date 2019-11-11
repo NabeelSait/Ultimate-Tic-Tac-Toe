@@ -39,7 +39,7 @@ public class Game extends JFrame {
 
     @Subscribe
     public void buttonEvent(JButton button) {
-        // Construct the gameboard and begin playing!
+        // Construct GameBoard and begin playing!
         if (button.getText().compareTo("   Play Against a Computer   ") == 0) {
             getContentPane().remove(_menu);
             getContentPane().add(_gameScreen);
@@ -48,9 +48,9 @@ public class Game extends JFrame {
         // Go back to the main menu
         else if (button.getText().compareTo("Forfeit") == 0) {
             System.out.println("got here");
-//            getContentPane().remove(_gameScreen);
-//            getContentPane().add(_menu);
-//            setMenuCharacteristics();
+            getContentPane().remove(_gameScreen);
+            getContentPane().add(_menu);
+            setMenuCharacteristics();
         }
     }
 }

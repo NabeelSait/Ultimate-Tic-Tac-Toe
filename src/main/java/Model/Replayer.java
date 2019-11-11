@@ -1,5 +1,10 @@
 package Model;
 
+import UI.GameBoard;
+import UI.ReplayScreen;
+
+import java.util.ArrayList;
+
 public class Replayer
 {
    private ArrayList<String> _moveList;
@@ -7,8 +12,7 @@ public class Replayer
 
    public Replayer(String filePath)
    {
-      _moveList = new ArrayList<String>;
-      _replayBoard = new GameBoard();
+      _moveList = new ArrayList<String>();
    }
 
    public void nextMove() {}
