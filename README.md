@@ -15,7 +15,7 @@ In File -> Project Structure -> Modules, change the language level to 12.
 
 ## Compiling and Running
 
-```mvn clean install``
+```mvn clean install```
 
 ## Requirements
   - Java 8
