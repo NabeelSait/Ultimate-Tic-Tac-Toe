@@ -2,6 +2,8 @@ package UI;
 
 import javax.swing.*;
 import java.awt.*;
+
+import Model.GameBoardModel;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 

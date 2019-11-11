@@ -15,4 +15,14 @@ public class GamePanelModel implements GameModel {
 
     public void checkWinCon(int pos, Player player) {
     }
+
+    @Override
+    public void checkWinCon(Player player) {
+
+    }
+
+    @Override
+    public void fillSquare(Player player) {
+
+    }
 }

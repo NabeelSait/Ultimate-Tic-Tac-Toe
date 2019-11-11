@@ -14,7 +14,7 @@ class GameScreen extends JPanel {
         _bus = bus;
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        GameBoard _gameBoard = new GameBoard();
+        GameBoard _gameBoard = new GameBoard(bus);
 
         c.gridx = 0;
         c.gridy = 0;

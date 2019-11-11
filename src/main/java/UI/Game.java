@@ -54,6 +54,8 @@ public class Game extends JFrame {
         }
     }
 
-    @Suscribe
-    public void endGame(EndGameEvent e) {}
+    @Subscribe
+    public void endGame(int e) {
+
+    }
 }
