@@ -12,7 +12,12 @@ public class GameBoardModel implements GameModel {
 
     public GameBoardModel(Eventbus e)
     {
-      
+      GamePanelModel[] _boards = new GamePanelModel[9];
+      for (int i = 0; i < 9; i++)
+      {
+         _boards[i] = new GamePanelModel();
+      }
+      _moveList = new ArrayList<Move>
     }
 
     //posts EndGameEvent object
