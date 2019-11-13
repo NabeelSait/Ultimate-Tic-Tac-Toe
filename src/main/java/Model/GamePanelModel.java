@@ -10,19 +10,10 @@ public class GamePanelModel implements GameModel {
         }
     }
 
-    public void fillSquare(int pos, Player player) {
+    public void fillSquare(Move m, Player player) {
     }
 
-    public void checkWinCon(int pos, Player player) {
+    public void checkWinCon(Move m, Player player) {
     }
 
-    @Override
-    public void checkWinCon(Player player) {
-
-    }
-
-    @Override
-    public void fillSquare(Player player) {
-
-    }
 }

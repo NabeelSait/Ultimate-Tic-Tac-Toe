@@ -4,9 +4,8 @@ public class HumanPlayer extends Player {
 
     private String name;
 
-    public HumanPlayer(char t, int n, String nm) {
+    public HumanPlayer(char t, int n) {
         super(t, n);
-        name = nm;
     }
 
     public void setName(String nm) {

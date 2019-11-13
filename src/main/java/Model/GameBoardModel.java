@@ -22,23 +22,14 @@ public class GameBoardModel implements GameModel {
     }
 
     //posts EndGameEvent object
-    public void checkWinCon(int pos, Player player) {
+    public void checkWinCon(Move m, Player player) {
     }
 
-    public void fillSquare(int pos, Player player) {
+    public void fillSquare(Move m, Player player) {
     }
 
     public ArrayList<Move> getMoveList(){
       return _moveList;
    }
 
-    @Override
-    public void checkWinCon(Player player) {
-
-    }
-
-    @Override
-    public void fillSquare(Player player) {
-
-    }
 }

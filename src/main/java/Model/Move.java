@@ -4,7 +4,7 @@ public class Move {
     private int _board;
     private int _pos;
 
-    Move(int board, int position) {
+    public Move(int board, int position) {
         _board = board;
         _pos = position;
     }
