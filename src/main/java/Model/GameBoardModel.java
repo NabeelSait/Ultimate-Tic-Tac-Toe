@@ -3,6 +3,7 @@ import com.google.common.eventbus.EventBus;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("ALL")
 public class GameBoardModel implements GameModel {
     private GamePanelModel[] boards;
     private EventBus _bus;
@@ -17,13 +18,13 @@ public class GameBoardModel implements GameModel {
       {
          _boards[i] = new GamePanelModel();
       }
-      _moveList = new ArrayList<Move>();
+      _moveList = new ArrayList<>();
     }
 
     //posts EndGameEvent object
     public int checkWinCon(Move m, Player player)
     {
-      if (player.Score >= 5)
+      if (player.score >= 5)
       {
          EndGameEvent e = new EndGameEvent(player);
          _bus.post(e);
@@ -34,7 +35,7 @@ public class GameBoardModel implements GameModel {
     public void fillSquare(Move m, Player player)
     {
       boards[m.getBoard()].fillSquare(m, player);
-      player.Score += boards[m.getBoard()].checkWinCon(m, player);
+      player.score += boards[m.getBoard()].checkWinCon(m, player);
       this.checkWinCon(m, player);
     }
 

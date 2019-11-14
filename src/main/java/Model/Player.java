@@ -3,20 +3,20 @@ package Model;
 public abstract class Player {
     private static char type;
     private static int number;
-    public int Score;
+    int score;
 
     public Player(char t, int n) {
         type = t;
         number = n;
-        this.Score = 0;
+        score = 0;
     }
 
     public char getType() {
-        return 'x';
+        return type;
     }
 
     public int getNumber() {
-        return 5;
+        return number;
     }
 
     public abstract Move takeTurn();
