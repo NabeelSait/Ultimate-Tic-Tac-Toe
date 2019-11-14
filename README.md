@@ -15,7 +15,9 @@ In File -> Project Structure -> Modules, change the language level to 12.
 
 ## Compiling and Running
 
-```mvn clean install```
+```./scripts/compile.sh```
+```./scripts/run.sh```
+```./scripts/run_tests.sh```
 
 ## Requirements
   - Java 8
