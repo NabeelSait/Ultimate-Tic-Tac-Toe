@@ -1,8 +1,10 @@
+package Model;
+
 public class EndGameEvent
 {
-   public final String message;
-   public EndGameEvent(String message)
+   public final Player player;
+   public EndGameEvent(Player player)
    {
-      this.message = message;
+      this.player = player;
    }
 }

@@ -10,10 +10,21 @@ public class GamePanelModel implements GameModel {
         }
     }
 
-    public void fillSquare(Move m, Player player) {
+    public void fillSquare(Move m, Player player)
+    {
+      squares[m.getPosition()] = player.getType();
     }
 
-    public void checkWinCon(Move m, Player player) {
+    public int checkWinCon(Move m, Player player)
+    {
+      if (1 == 1)  //Insert actual wincon checking here
+      {
+         return 1;
+      }
+      else
+      {
+         return 0;
+      }
     }
 
 }

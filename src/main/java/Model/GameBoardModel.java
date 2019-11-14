@@ -5,10 +5,9 @@ import java.util.ArrayList;
 
 public class GameBoardModel implements GameModel {
     private GamePanelModel[] boards;
-    private Player _player1;
-    private Player _player2;
     private EventBus _bus;
     private ArrayList<Move> _moveList;
+
 
 
     public GameBoardModel(EventBus e)
@@ -22,10 +21,21 @@ public class GameBoardModel implements GameModel {
     }
 
     //posts EndGameEvent object
-    public void checkWinCon(Move m, Player player) {
+    public int checkWinCon(Move m, Player player)
+    {
+      if (player.Score >= 5)
+      {
+         EndGameEvent e = new EndGameEvent(player);
+         _bus.post(e);
+      }
+      return 0;
     }
 
-    public void fillSquare(Move m, Player player) {
+    public void fillSquare(Move m, Player player)
+    {
+      boards[m.getBoard()].fillSquare(m, player);
+      player.Score += boards[m.getBoard()].checkWinCon(m, player);
+      this.checkWinCon(m, player);
     }
 
     public ArrayList<Move> getMoveList(){
