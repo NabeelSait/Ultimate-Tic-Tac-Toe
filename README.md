@@ -16,8 +16,11 @@ In File -> Project Structure -> Modules, change the language level to 12.
 ## Compiling and Running
 
 ```./scripts/compile.sh```
+
 ```./scripts/run.sh```
+
 ```./scripts/run_tests.sh```
+
 
 ## Requirements
   - Java 8
