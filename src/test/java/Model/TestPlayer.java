@@ -1,7 +1,5 @@
-package src.test.java.Model;
+package Model;
 
-import Model.ComputerPlayer;
-import Model.HumanPlayer;
 import org.junit.*;
 import static org.junit.Assert.*;
 

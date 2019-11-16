@@ -10,14 +10,15 @@ import com.google.common.eventbus.Subscribe;
 public class GameBoard extends JPanel {
     private GamePanel[] _boards;
     private GameBoardModel _model;
-    private Player _player1, _player2, _Activeplayer;
+    private Player _player1, _player2, _activePlayer;
 
     public GameBoard(EventBus e) {
         setLayout(new GridLayout(3, 3, 10, 10));
-        _player1 = new HumanPlayer("X",1);
+        _player1 = new HumanPlayer("X", 1);
         _player2 = new HumanPlayer("O", 2);
-        _Activeplayer = _player1;
-        GamePanel[] _boards = new GamePanel[9];
+        _activePlayer = _player1;
+        _boards = new GamePanel[9];
+        _model = new GameBoardModel(e);
         for (int i = 0; i < 9; i++) {
             _boards[i] = new GamePanel(e, i);
             add(_boards[i]);
@@ -25,51 +26,46 @@ public class GameBoard extends JPanel {
         _model = new GameBoardModel(e, _player1, _player2);
     }
 
-    @Subscribe
-    public void buttonEvent(Move m)
-    {
-      if (!(_model.checkClosed(m)))
-      {
-         for (int i= 0; i < 9; i++)
-         {
-            if (i == m.getPosition())
-            {
-               _boards[i].openBoard();
-            }
-            else
-            {
-               _boards[i].closeBoard();
-            }
-         }
-      }
-      else
-      {
-         for (int i= 0; i < 9; i++)
-         {
-            if (i == m.getPosition())
-            {
-               _boards[i].closeBoard();
-            }
-            else
-            {
-               _boards[i].openBoard();
-            }
-         }
-      }
+    void closeAllBoards() {
+        for (GamePanel board : _boards) {
+            board.closeBoard();
+        }
+    }
 
-      _model.fillSquare(m, _Activeplayer);
-      if (_Activeplayer == _player1)
-      {
-         _Activeplayer = _player2;
-         m = _player2.takeTurn();
-         if ((m.getBoard() >= 0) & (m.getBoard() >= 0))
-         {
-            _model.fillSquare(m, _Activeplayer);
-         }
-      }
-      else
-      {
-         _Activeplayer = _player1;
-      }
+    void closeBoard(int board) {
+        _boards[board].closeBoard();
+    }
+
+    private void endTurn() {
+        if (_activePlayer == _player1) {
+            _activePlayer = _player2;
+        } else {
+            _activePlayer = _player1;
+        }
+    }
+
+    @Subscribe
+    public void buttonEvent(Move m) {
+        if (!_model.checkClosed(m)) {
+            for (int i = 0; i < 9; i++) {
+                if (i == m.getPosition()) {
+                    _boards[i].openBoard();
+                } else {
+                    _boards[i].closeBoard();
+                }
+            }
+        } else {
+            for (int i = 0; i < 9; i++) {
+                if (i == m.getPosition()) {
+                    _boards[i].closeBoard();
+                } else {
+                    _boards[i].openBoard();
+                }
+            }
+        }
+
+        _model.fillSquare(m, _activePlayer);
+        _boards[m.getBoard()].fillSquare(m.getPosition(), _activePlayer);
+        endTurn();
     }
 }

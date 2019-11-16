@@ -13,6 +13,7 @@ class Menu extends JPanel {
 
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
+      setPreferredSize(new Dimension(600, 600));
 
       JTextField title = new JTextField("Ultimate Tic Tac Toe");
       title.setEditable(false);
@@ -48,8 +49,5 @@ class Menu extends JPanel {
       c.gridy = 3;
 
       add(replay, c);
-
-      setVisible(true);
-      setBounds(400,400,300,300);
    }
 }

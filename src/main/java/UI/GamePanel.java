@@ -5,6 +5,7 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
@@ -19,49 +20,42 @@ class GamePanel extends JPanel {
         _boardID = boardID;
         for (int i = 0; i < 9; i++) {
             _buttons[i] = new JButton();
+            _buttons[i].setFont(new Font("Arial", Font.PLAIN, 7));
             add(_buttons[i]);
             _buttonID = i;
-            _buttons[i].addActionListener(new ActionListener(){
-               public void actionPerformed(ActionEvent e)
-               {
-                  Move m = new Move(_boardID, _buttonID);
-                  bus.post(m);
-               }
-            });
-        setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-        setPreferredSize(new Dimension(200, 200));
-    }
-  }
-
-   public int getBoardID()
-   {
-      return _boardID;
-   }
-
-   public void closeBoard()
-   {
-      for (int i = 0; i < 9; i++)
-      {
-         _buttons[i].setEnabled(false);
-      }
-
+            _buttons[i].addActionListener(e -> bus.post(new Move(_boardID, _buttonID)));
+            setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
+            setPreferredSize(new Dimension(130, 130));
+        }
     }
 
-    public void openBoard()
-    {
-      for (int i = 0; i < 9; i++)
-      {
-         if (_buttons[i].getText() == "")
-         {
-            _buttons[i].setEnabled(true);
-         }
-      }
-     }
+    public int getBoardID() {
+        return _boardID;
+    }
 
-     public void fillSquare(Player player, int pos)
-     {
-        _buttons[pos].setText(String.valueOf(player.getType()));
-        _buttons[pos].setForeground(Color.BLACK);
-        _buttons[pos].setEnabled(false);
-     }
+    public void closeBoard() {
+        for (JButton button : _buttons) {
+            button.setEnabled(false);
+        }
+    }
+
+    public void openBoard() {
+        for (JButton button : _buttons) {
+            if (button.getText().equals("")) {
+                button.setEnabled(true);
+            }
+        }
+    }
+
+    void fillSquare(int pos, Player player) {
+        Image img;
+        if(player.getType().compareTo("O") == 0) {
+            img = new ImageIcon("./.icons/o.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        }
+        else {
+            img = new ImageIcon("./.icons/x.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        }
+        _buttons[pos].setIcon(new ImageIcon(img));
+        closeBoard();
+    }
 }

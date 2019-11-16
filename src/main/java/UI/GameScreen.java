@@ -3,35 +3,41 @@ package UI;
 import com.google.common.eventbus.EventBus;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 class GameScreen extends JPanel {
     private JTextField _statusBar;
     private EventBus _bus;
-    private JButton forfeitButton;
+    private JButton _forfeitButton;
+    private GameBoard _gameBoard;
 
     GameScreen(EventBus bus) {
         _bus = bus;
+
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        GameBoard _gameBoard = new GameBoard(bus);
 
+        _statusBar = new JTextField("Player 1's Turn");
+        _statusBar.setEditable(false);
+        _statusBar.setBorder(new EmptyBorder(15, 5, 15, 5));
+        _statusBar.setFont(new Font("Verdana",Font.PLAIN,25));
         c.gridx = 0;
         c.gridy = 0;
-        c.anchor = GridBagConstraints.NORTHWEST;
-        add(_gameBoard, c);
-
-        _statusBar = new JTextField("Player1's Turn");
-        _statusBar.setEditable(false);
-        c.gridx = 0;
-        c.gridy = 1;
-        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(10,10,0,0);
+        c.anchor = GridBagConstraints.PAGE_START;
         add(_statusBar, c);
 
-        forfeitButton = new JButton("Forfeit");
-        forfeitButton.addActionListener(e -> _bus.post(forfeitButton));
-        c.gridx = 0;
+        _gameBoard = new GameBoard(bus);
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.CENTER;
+        add(_gameBoard, c);
+
+        _forfeitButton = new JButton("Forfeit");
+        _forfeitButton.addActionListener(e -> _bus.post(_forfeitButton));
         c.gridy = 2;
-        add(forfeitButton, c);
+        c.anchor = GridBagConstraints.PAGE_END;
+        c.insets = new Insets(20,0,0,0);
+        add(_forfeitButton, c);
     }
 }

@@ -1,8 +1,8 @@
 package Model;
 
 public abstract class Player {
-    protected static String type;
-    protected static int number;
+    private String type;
+    private int number;
     int score;
 
     public Player(String t, int n) {
