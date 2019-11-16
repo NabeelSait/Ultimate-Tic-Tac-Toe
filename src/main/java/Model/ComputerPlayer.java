@@ -2,7 +2,7 @@ package Model;
 
 public class ComputerPlayer extends Player
 {
-   public ComputerPlayer(char t, int n)
+   public ComputerPlayer(String t, int n)
    {
       super(t,n);
    }

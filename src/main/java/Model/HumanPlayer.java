@@ -4,7 +4,7 @@ public class HumanPlayer extends Player {
 
     private String name;
 
-    public HumanPlayer(char t, int n) {
+    public HumanPlayer(String t, int n) {
         super(t, n);
     }
 
@@ -18,7 +18,7 @@ public class HumanPlayer extends Player {
 
     public Move takeTurn()
     {
-      return new Move(0,0);
+      return new Move(-1,-1);
     }
 
 

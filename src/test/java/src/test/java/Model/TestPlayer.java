@@ -8,9 +8,9 @@ import static org.junit.Assert.*;
 public class TestPlayer {
     @Test
     public void testHumanPlayerConstructor() {
-        HumanPlayer player = new HumanPlayer('x', 1);
-        assertEquals(player.getType(), 'x');
-        assertNotEquals(player.getType(), 'o');
+        HumanPlayer player = new HumanPlayer("X", 1);
+        assertEquals(player.getType(), "X");
+        assertNotEquals(player.getType(), "O");
 
         assertEquals(player.getNumber(), 1);
         assertNotEquals(player.getNumber(), 2);
@@ -18,9 +18,9 @@ public class TestPlayer {
 
     @Test
     public void testComputerPlayerConstructor() {
-        ComputerPlayer player = new ComputerPlayer('x', 1);
-        assertEquals(player.getType(), 'x');
-        assertNotEquals(player.getType(), 'o');
+        ComputerPlayer player = new ComputerPlayer("X", 1);
+        assertEquals(player.getType(), "X");
+        assertNotEquals(player.getType(), "O");
 
         assertEquals(player.getNumber(), 1);
         assertNotEquals(player.getNumber(), 2);
@@ -28,7 +28,7 @@ public class TestPlayer {
 
     @Test
     public void testHumanPlayerName() {
-        HumanPlayer player = new HumanPlayer('x', 1);
+        HumanPlayer player = new HumanPlayer("X", 1);
         player.setName("Mike");
         assertEquals(player.getName(), "Mike");
         assertNotEquals(player.getName(), "Kim");

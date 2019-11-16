@@ -1,27 +1,34 @@
 package Model;
 
 public class GamePanelModel implements GameModel {
-    private char[] squares;
+    private String[] squares;
+    private int _squaresfilled;
+    public boolean isClosed;
 
     public GamePanelModel() {
-        squares = new char[9];
+        squares = new String[9];
         for (int i = 0; i < 9; i++) {
-            squares[i] = Character.MIN_VALUE;
+            squares[i] = "";
         }
+        isClosed = false;
     }
 
     public void fillSquare(Move m, Player player)
     {
-      squares[m.getPosition()] = player.getType();
+      if (!(isClosed))
+      {
+         squares[m.getPosition()] = player.getType();
+         _squaresfilled ++;
+      }
     }
 
     public int checkWinCon(Move m, Player player)
     {
-      int pos = m.getPosition();
+      int pos = new Integer(m.getPosition());
       //Horizontal Right
       if (((pos + 1) <= 8) & ((pos + 1) >= 0) & ((squares[pos + 1].equals(player.getType()))))
       {
-         if (((pos + 2) <= 8) & ((pos + 2) >= 0)) & ((squares[pos +2].equals(player.getType()))))
+         if (((pos + 2) <= 8) & ((pos + 2) >= 0) & ((squares[pos +2].equals(player.getType()))))
          {
             return 1;
          }
@@ -29,7 +36,7 @@ public class GamePanelModel implements GameModel {
       //Horizontal Left
       if (((pos - 1) <= 8) & ((pos - 1) >= 0) & ((squares[pos - 1].equals(player.getType()))))
       {
-         if (((pos - 2) <= 8) & ((pos - 2) >= 0)) & ((squares[pos - 2].equals(player.getType()))))
+         if (((pos - 2) <= 8) & ((pos - 2) >= 0) & ((squares[pos - 2].equals(player.getType()))))
          {
             return 1;
          }
@@ -37,7 +44,7 @@ public class GamePanelModel implements GameModel {
       //Vertical Up
       if (((pos - 3) <= 8) & ((pos - 3) >= 0) & ((squares[pos - 3].equals(player.getType()))))
       {
-         if (((pos - 3) <= 8) & ((pos - 3) >= 0)) & ((squares[pos - 3].equals(player.getType()))))
+         if (((pos - 3) <= 8) & ((pos - 3) >= 0) & ((squares[pos - 3].equals(player.getType()))))
          {
             return 1;
          }
@@ -45,13 +52,13 @@ public class GamePanelModel implements GameModel {
       //Vertical Down
       if (((pos + 3) <= 8) & ((pos + 3) >= 0) & ((squares[pos + 3].equals(player.getType()))))
       {
-         if (((pos + 6) <= 8) & ((pos + 6) >= 0)) & ((squares[pos + 6].equals(player.getType()))))
+         if (((pos + 6) <= 8) & ((pos + 6) >= 0) & ((squares[pos + 6].equals(player.getType()))))
          {
             return 1;
          }
       }
       //Diagonals
-      if (squares[4].equals(player.getType())
+      if (squares[4].equals(player.getType()))
       {
          if ((pos == 0) & (squares[8].equals(player.getType()))) //Bottom Left to Top Right
          {
@@ -70,7 +77,11 @@ public class GamePanelModel implements GameModel {
             return 1;
          }
       }
+      //Checks for ties
+      if(_squaresfilled == 9)
+      {
+         return -1;
+      }
       return 0;
     }
-
 }
