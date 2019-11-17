@@ -7,18 +7,18 @@ import Model.*;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
-public class GameBoard extends JPanel {
+class GameBoard extends JPanel {
     private GamePanel[] _boards;
     private GameBoardModel _model;
     private Player _player1, _player2, _activePlayer;
 
-    public GameBoard(EventBus e) {
+    GameBoard(EventBus e) {
         setLayout(new GridLayout(3, 3, 10, 10));
         _player1 = new HumanPlayer("X", 1);
         _player2 = new HumanPlayer("O", 2);
         _activePlayer = _player1;
         _boards = new GamePanel[9];
-        _model = new GameBoardModel(e);
+        _model = new GameBoardModel(e, _player1, _player2);
         for (int i = 0; i < 9; i++) {
             _boards[i] = new GamePanel(e, i);
             add(_boards[i]);
@@ -45,7 +45,7 @@ public class GameBoard extends JPanel {
     }
 
     @Subscribe
-    public void buttonEvent(Move m) {
+    void buttonEvent(Move m) {
         if (!_model.checkClosed(m)) {
             for (int i = 0; i < 9; i++) {
                 if (i == m.getPosition()) {

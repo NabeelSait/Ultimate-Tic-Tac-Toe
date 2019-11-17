@@ -2,16 +2,16 @@ package Model;
 
 public class ComputerPlayer extends Player
 {
-   public ComputerPlayer(String t, int n)
+   ComputerPlayer(String t, int n)
    {
       super(t,n);
    }
 
-   public Move takeTurn() {
-      return step();
+   public Move takeTurn(int board) {
+      return step(board);
    }
 
-   private Move step() {
-      return new Move(0, 0);
+   private Move step(int board) {
+      return new Move(board, 0);
    }
 }

@@ -12,15 +12,6 @@ public class GameBoardModel implements GameModel {
     private Player _player1, _player2;
     private int _panelsfilled;
 
-
-    public GameBoardModel(EventBus e) {
-        _panels = new GamePanelModel[9];
-        for (int i = 0; i < 9; i++) {
-            _panels[i] = new GamePanelModel();
-        }
-        _moveList = new ArrayList<>();
-    }
-
     public GameBoardModel(EventBus e, Player p1, Player p2) {
         _panels = new GamePanelModel[9];
         for (int i = 0; i < 9; i++) {
@@ -56,12 +47,12 @@ public class GameBoardModel implements GameModel {
 
     public void fillSquare(Move m, Player player) {
         GamePanelModel panel = _panels[m.getBoard()];
-        if (!(panel.isClosed)) {
-            panel.fillSquare(m, player);
-            if (panel.checkWinCon(m, player) > 0) {
-                player.score += panel.checkWinCon(m, player);
+        if (panel.open()) {
+            panel.fillSquare(m.getPosition(), player);
+            if (panel.checkWinCon(m.getPosition(), player)) {
+                player.score += 1;
                 _panelsfilled++;
-                panel.isClosed = true;
+                panel.close();
             }
             this.checkWinCon(m, player);
             _moveList.add(m);
@@ -69,7 +60,7 @@ public class GameBoardModel implements GameModel {
     }
 
     public boolean checkClosed(Move m) {
-        if (_panels[m.getPosition()].isClosed) {
+        if (!_panels[m.getPosition()].open()) {
             return true;
         }
         return false;

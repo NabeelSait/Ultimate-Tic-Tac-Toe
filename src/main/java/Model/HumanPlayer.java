@@ -7,17 +7,17 @@ public class HumanPlayer extends Player {
         super(t, n);
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         _name = name;
     }
 
-    public String getName() {
+    String getName() {
         return _name;
     }
 
-    public Move takeTurn()
+    public Move takeTurn(int board)
     {
-      return new Move(-1,-1);
+      return new Move(board,1);
     }
 
 

@@ -11,7 +11,7 @@ import com.google.common.eventbus.Subscribe;
 
 class GamePanel extends JPanel {
     private JButton[] _buttons = new JButton[9];
-    private static int pos[] = new int[9];
+    private static int[] pos = new int[9];
     private int _boardID;
     private int _buttonID;
 
@@ -33,13 +33,13 @@ class GamePanel extends JPanel {
         return _boardID;
     }
 
-    public void closeBoard() {
+    void closeBoard() {
         for (JButton button : _buttons) {
             button.setEnabled(false);
         }
     }
 
-    public void openBoard() {
+    void openBoard() {
         for (JButton button : _buttons) {
             if (button.getText().equals("")) {
                 button.setEnabled(true);
@@ -48,6 +48,7 @@ class GamePanel extends JPanel {
     }
 
     void fillSquare(int pos, Player player) {
+        //TODO: Load these once for all boards instead of at every move
         Image img;
         if(player.getType().compareTo("O") == 0) {
             img = new ImageIcon("./.icons/o.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);

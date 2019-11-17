@@ -9,10 +9,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class FileManager extends JFrame {
-   JFileChooser _chooser;
-   EventBus _bus;
+   private JFileChooser _chooser;
+   private EventBus _bus;
 
-   public FileManager(EventBus bus) {
+   FileManager(EventBus bus) {
       _chooser = new JFileChooser();
       _chooser.setCurrentDirectory(new File("./replays"));
       _bus = bus;
@@ -30,7 +30,6 @@ public class FileManager extends JFrame {
       int response = _chooser.showOpenDialog(null);
       if (response == JFileChooser.FILES_ONLY) {
          File file = _chooser.getSelectedFile();
-         System.out.println(file.getName());
          _bus.post(file);
       }
       // if the user cancelled the operation

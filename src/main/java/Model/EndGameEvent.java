@@ -3,11 +3,11 @@ package Model;
 public class EndGameEvent
 {
    public final Player player;
-   public EndGameEvent()
+   EndGameEvent()
    {
       player = new HumanPlayer("NULL", 0);
    }
-   public EndGameEvent(Player player)
+   EndGameEvent(Player player)
    {
       this.player = player;
    }

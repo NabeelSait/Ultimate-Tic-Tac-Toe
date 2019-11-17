@@ -1,22 +1,51 @@
 package Model;
 
-import UI.GameBoard;
-import UI.ReplayScreen;
-
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Replayer
 {
    private ArrayList<Move> _moveList;
-   private ReplayScreen _replayScreen;
+   private int _moveIndex;
 
-   public Replayer(String filePath)
+   public Replayer(File replayFile)
    {
-      _moveList = new ArrayList<Move>();
+      _moveList = new ArrayList<>();
+      try {
+         Scanner sc = new Scanner(replayFile);
+
+         while(sc.hasNext()) {
+            _moveList.add(new Move(sc.nextInt(), sc.nextInt()));
+         }
+      } catch (FileNotFoundException e) {
+         e.printStackTrace();
+      }
+      _moveIndex = 0;
    }
 
-   public void nextMove() {}
+   public Move nextMove() {
+      Move move = _moveList.get(_moveIndex);
+      _moveIndex++;
+      return move;
+   }
 
-   public void previousMove() {}
+   public Move previousMove() {
+      _moveIndex--;
+      return _moveList.get(_moveIndex);
+   }
+
+   public boolean hasNextMove() {
+      return _moveIndex != _moveList.size() - 1;
+   }
+
+   public boolean hasPrevMove() {
+      return _moveIndex > 0;
+   }
+
+   int getTotalMoves() {
+      return _moveList.size();
+   }
 
 }

@@ -1,26 +1,20 @@
 package UI;
 
-import Model.Move;
+import Model.Replayer;
 import com.google.common.eventbus.EventBus;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class ReplayScreen extends JPanel
+class ReplayScreen extends JPanel
 {
    private JButton _prev, _next, _quit;
    private GameBoard _gameBoard;
-   private int _moveIndex;
-   private ArrayList<Move> _moves;
    private EventBus _bus;
+   private Replayer _replayer;
 
    ReplayScreen(EventBus bus) {
-      _moves = new ArrayList<>();
       _bus = bus;
 
       setLayout(new GridBagLayout());
@@ -57,32 +51,22 @@ public class ReplayScreen extends JPanel
    }
 
    void loadReplay(File replayFile) {
-      try {
-         Scanner sc = new Scanner(replayFile);
-
-         while(sc.hasNext()) {
-            _moves.add(new Move(sc.nextInt(), sc.nextInt()));
-         }
-      } catch (FileNotFoundException e) {
-         e.printStackTrace();
-      }
+      _replayer = new Replayer(replayFile);
    }
 
    private void nextMove() {
-      _gameBoard.buttonEvent(_moves.get(_moveIndex));
-      _moveIndex++;
-      if (_moveIndex == _moves.size()) {
+      _gameBoard.buttonEvent(_replayer.nextMove());
+      if (!_replayer.hasNextMove()) {
          _next.setEnabled(false);
       }
-      if(_moveIndex > 0) {
+      if(_replayer.hasPrevMove()) {
          _prev.setEnabled(true);
       }
    }
 
    private void previousMove() {
-      _gameBoard.buttonEvent(_moves.get(_moveIndex));
-      _moveIndex--;
-      if (_moveIndex < 0) {
+      _gameBoard.buttonEvent(_replayer.previousMove());
+      if(_replayer.hasPrevMove()) {
          _prev.setEnabled(false);
       }
    }

@@ -15,10 +15,10 @@ public abstract class Player {
         return type;
     }
 
-    public int getNumber() {
+    int getNumber() {
         return number;
     }
 
-    public abstract Move takeTurn();
+    public abstract Move takeTurn(int board);
 
 }
