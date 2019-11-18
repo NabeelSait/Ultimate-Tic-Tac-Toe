@@ -83,4 +83,9 @@ class GamePanelModel {
     String getSquare(int position) {
         return _squares[position];
     }
+
+    int getSquaresFilled()
+    {
+       return _squaresFilled;
+    }
 }

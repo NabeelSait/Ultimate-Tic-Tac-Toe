@@ -25,24 +25,29 @@ public class GameBoardModel implements GameModel {
     }
 
     //posts EndGameEvent object
-    public int checkWinCon(Move m, Player player) {
+    public boolean checkWinCon(Move m, Player player) {
         //Checks for direct win
         if (player.score >= 5) {
             EndGameEvent e = new EndGameEvent(player);
             _bus.post(e);
+	    return true;
         } else if (_panelsfilled == 9) {
             if (_player1.score > _player2.score) {
                 EndGameEvent e = new EndGameEvent(_player1);
                 _bus.post(e);
+                return true;
             } else if (_player2.score > _player1.score) {
                 EndGameEvent e = new EndGameEvent(_player2);
                 _bus.post(e);
+                return true;
             } else {
                 EndGameEvent e = new EndGameEvent();
                 _bus.post(e);
+                return true;
             }
         }
-        return 0;
+	return false;
+  
     }
 
     public void fillSquare(Move m, Player player) {
@@ -70,4 +75,20 @@ public class GameBoardModel implements GameModel {
         return _moveList;
     }
 
+
+    //Some methods for Unit Testing
+    
+    public int getPanelsFilled()
+    {
+       return _panelsfilled;
+    }
+
+    public int setPanelsFilled(int pf)
+    {
+       _panelsfilled = pf;
+    }
+         
+
+    
+    
 }
