@@ -41,13 +41,13 @@ class GamePanelModel {
             }
         }
         //Vertical Up
-        else if (pos - 3 <= 8 & pos - 3 >= 0 && _squares[pos - 3].equals(player.getType())) {
-            if ( _squares[pos - 3].equals(player.getType())) {
+        else if (pos - 3 >= 0 && _squares[pos - 3].equals(player.getType())) {
+            if (pos - 6 >= 0 && _squares[pos - 6].equals(player.getType())) {
                 return true;
             }
         }
         //Vertical Down
-        else if (pos + 3 <= 8 && pos + 3 >= 0 && _squares[pos + 3].equals(player.getType())) {
+        else if (pos + 3 <= 8 && _squares[pos + 3].equals(player.getType())) {
             if (pos + 6 <= 8 && _squares[pos + 6].equals(player.getType())) {
                 return true;
             }
@@ -65,9 +65,7 @@ class GamePanelModel {
             {
                 return true;
             }
-            else if (pos == 6 & _squares[2].equals(player.getType())) {
-                return true;
-            }
+            else return pos == 6 & _squares[2].equals(player.getType());
         }
         return false;
     }

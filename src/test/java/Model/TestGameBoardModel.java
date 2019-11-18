@@ -1,5 +1,6 @@
 package Model;
 
+import com.google.common.eventbus.EventBus;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -52,11 +53,11 @@ public class TestGameBoardModel {
       EventBus e = new EventBus();
       Player p1 = new HumanPlayer("X", 1);
       Player p2 = new HumanPlayer("O", 2);
+      p1.score = 3;
+      p2.score = 3;
       GameBoardModel model = new GameBoardModel(e, p1, p2);
       model.setPanelsFilled(9);
       Move mv = new Move(0, 0);
-      p1.score = 3;
-      p2.score = 3;
       assertFalse(model.checkWinCon(mv, p1));
    
    }
@@ -71,7 +72,7 @@ public class TestGameBoardModel {
       GameBoardModel model = new GameBoardModel(e, p1, p2);
       Move mv1 = new Move(0, 0);
       model.fillSquare(mv1, p1);
-      assertTrue(_panels[mv1.getBoard()].open());
+      assertTrue(model.boardOpen(mv1.getBoard()));
    
 
    }
@@ -89,9 +90,9 @@ public class TestGameBoardModel {
       Move mv2 = new Move(0, 1);
       Move mv3 = new Move(0, 2);
       model.fillSquare(mv1, p1);
-      model.fillSquare(mv2, p2);
-      model.fillSquare(mv3, p2);
-      assertTrue(model.checkClosed(mv1);   
+      model.fillSquare(mv2, p1);
+      model.fillSquare(mv3, p1);
+      assertTrue(model.checkClosed(mv1));
    }
 
    @Test

@@ -29,7 +29,7 @@ public class TestGamePanelModel {
         assertFalse(model.checkWinCon(3, player));
 
         model.fillSquare(6, player);
-        assertTrue(model.checkWinCon(7, player));
+        assertTrue(model.checkWinCon(6, player));
 
     }
 
@@ -42,7 +42,7 @@ public class TestGamePanelModel {
         assertFalse(model.checkWinCon(4, player));
 
         model.fillSquare(7, player);
-        assertTrue(model.checkWinCon(7, player);
+        assertTrue(model.checkWinCon(7, player));
     }
 
     @Test
@@ -51,10 +51,10 @@ public class TestGamePanelModel {
         Player player = new HumanPlayer("X", 0);
         model.fillSquare(2, player);
         model.fillSquare(5, player);
-        assertFalse(model.checkWinCon(5, player);
+        assertFalse(model.checkWinCon(5, player));
         
         model.fillSquare(8, player);
-        assertTrue(model.checkWinCon(8, player);
+        assertTrue(model.checkWinCon(8, player));
     }
 
     @Test
@@ -63,10 +63,10 @@ public class TestGamePanelModel {
         Player player = new HumanPlayer("X", 0);
         model.fillSquare(0, player);
         model.fillSquare(1, player);
-        assertFalse(model.checkWinCon(1, player);
+        assertFalse(model.checkWinCon(1, player));
  
         model.fillSquare(2, player);
-        assertTrue(model.checkWinCon(2, player);
+        assertTrue(model.checkWinCon(2, player));
     }
 
     @Test
@@ -99,10 +99,10 @@ public class TestGamePanelModel {
         Player player = new HumanPlayer("X", 0);
         model.fillSquare(0, player);
         model.fillSquare(4, player);
-        assertFalse(model.checkWinCon(4, player);
+        assertFalse(model.checkWinCon(4, player));
     
         model.fillSquare(8, player);
-        assertTrue(model.checkWinCon(8, player);
+        assertTrue(model.checkWinCon(8, player));
     }
 
     @Test
@@ -111,10 +111,10 @@ public class TestGamePanelModel {
         Player player = new HumanPlayer("X", 0);
         model.fillSquare(2, player);
         model.fillSquare(4, player);
-        assertFalse(model.checkWinCon(4, player);
+        assertFalse(model.checkWinCon(4, player));
         
         model.fillSquare(6, player);
-        assertTrue(model.checkWinCon(6, player);
+        assertTrue(model.checkWinCon(6, player));
     }
 
     @Test

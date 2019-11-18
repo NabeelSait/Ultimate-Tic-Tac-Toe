@@ -40,10 +40,6 @@ public class GameBoardModel implements GameModel {
                 EndGameEvent e = new EndGameEvent(_player2);
                 _bus.post(e);
                 return true;
-            } else {
-                EndGameEvent e = new EndGameEvent();
-                _bus.post(e);
-                return true;
             }
         }
 	return false;
@@ -86,6 +82,11 @@ public class GameBoardModel implements GameModel {
     public int setPanelsFilled(int pf)
     {
        _panelsfilled = pf;
+       return 1;
+    }
+
+    public boolean boardOpen(int board) {
+        return _panels[board].open();
     }
          
 
