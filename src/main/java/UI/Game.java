@@ -55,6 +55,11 @@ public class Game extends JFrame {
             getContentPane().add(_gameScreen);
             setGameScreenCharacteristics();
         }
+        else if (button.getText().compareTo("Play Against another Player") == 0) {
+            getContentPane().remove(_menu);
+            getContentPane().add(_gameScreen);
+            setGameScreenCharacteristics();
+         }
         // Go back to the main menu
         else if (button.getText().compareTo("Forfeit") == 0) {
             System.out.println("got here");

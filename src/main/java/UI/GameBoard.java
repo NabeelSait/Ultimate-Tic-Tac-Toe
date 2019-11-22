@@ -45,17 +45,17 @@ class GameBoard extends JPanel {
         }
     }
 
-    public void undoMove(Move current, Move prev)
+    public void undoMove(Move prev, Move pprev)
     {
       for (int i = 0; i < 9; i++) {
-          if (i == prev.getPosition()) {
-              _boards[i].closeBoard();
+          if (i == pprev.getPosition()) {
+              _boards[i].openBoard();
           }
-          if (i == current.getPosition()){
-             _boards[i].openBoard();
+          if (i == prev.getPosition()){
+             _boards[i].closeBoard();
           }
-          if (i == current.getBoard()){
-             _boards[i].undoMove(current);
+          if (i == prev.getBoard()){
+             _boards[i].undoMove(prev);
           }
       }
 
@@ -81,7 +81,6 @@ class GameBoard extends JPanel {
                 }
             }
         }
-
         _model.fillSquare(m, _activePlayer);
         _boards[m.getBoard()].fillSquare(m.getPosition(), _activePlayer);
         endTurn();

@@ -37,7 +37,7 @@ public class Replayer
    }
 
    public boolean hasNextMove() {
-      return _moveIndex != _moveList.size() - 1;
+      return _moveIndex != _moveList.size();
    }
 
    public boolean hasPrevMove() {

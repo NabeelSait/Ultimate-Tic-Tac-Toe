@@ -66,11 +66,14 @@ class ReplayScreen extends JPanel
    }
 
    private void previousMove() {
-      Move current = _replayer.previousMove();
       Move prev = _replayer.previousMove();
-      Move m = _replayer.nextMove();
-      _gameBoard.undoMove(current, prev);
-      if(_replayer.hasPrevMove()) {
+      Move pprev = new Move(-1,-1);
+      if (_replayer.hasPrevMove()){
+         pprev = _replayer.previousMove();
+         Move m = _replayer.nextMove();
+      }
+      _gameBoard.undoMove(prev, pprev);
+      if(!_replayer.hasPrevMove()) {
          _prev.setEnabled(false);
       }
    }
