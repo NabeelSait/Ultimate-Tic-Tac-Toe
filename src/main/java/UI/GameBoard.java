@@ -22,7 +22,7 @@ class GameBoard extends JPanel {
         else {
            _player2 = new HumanPlayer("O", 2);
         }
-        
+
         _activePlayer = _player1;
         _boards = new GamePanel[9];
         _model = new GameBoardModel(e, _player1, _player2);
@@ -68,7 +68,7 @@ class GameBoard extends JPanel {
     }
 
     @Subscribe
-    void buttonEvent(Move m) {
+    public void buttonEvent(final Move m) {
       System.out.println("Got here");
         if (!_model.checkClosed(m)) {
             for (int i = 0; i < 9; i++) {

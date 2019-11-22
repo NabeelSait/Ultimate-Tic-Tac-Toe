@@ -68,9 +68,21 @@ public class Game extends JFrame {
             getContentPane().remove(_gameScreen);
             getContentPane().add(_menu);
             setMenuCharacteristics();
+            invalidate();
+            validate();
+            repaint();
         }
         else if (button.getText().compareTo("           Watch a Replay           ") == 0) {
             _fileManager.pickReplay();
+        }
+        else if (button.getText().compareTo("Quit to Menu") == 0) {
+            System.out.println("got here");
+            getContentPane().remove(_replayScreen);
+            getContentPane().add(_menu);
+            setMenuCharacteristics();
+            invalidate();
+            validate();
+            repaint();
         }
     }
 

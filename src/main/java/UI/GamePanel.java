@@ -5,6 +5,7 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -12,17 +13,14 @@ import com.google.common.eventbus.Subscribe;
 class GamePanel extends JPanel {
     private JButton[] _buttons = new JButton[9];
     private static int[] pos = new int[9];
-    private int _boardID;
-    private int _buttonID;
+    private int _boardID;;
 
     GamePanel(EventBus bus, int boardID) {
         setLayout(new GridLayout(3, 3, 5, 5));
-        _boardID = boardID;
         for (int i = 0; i < 9; i++) {
             _buttons[i] = new JButton();
-            _buttons[i].setFont(new Font("Arial", Font.PLAIN, 7));
             add(_buttons[i]);
-            _buttonID = i;
+            final int _buttonID = i;
             _buttons[i].addActionListener(e -> bus.post(new Move(_boardID, _buttonID)));
             setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
             setPreferredSize(new Dimension(130, 130));
