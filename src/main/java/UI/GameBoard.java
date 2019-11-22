@@ -12,11 +12,17 @@ class GameBoard extends JPanel {
     private GameBoardModel _model;
     private Player _player1, _player2, _activePlayer;
 
-    GameBoard(EventBus e) {
+    GameBoard(EventBus e, boolean isComputer) {
         e.register(this);
         setLayout(new GridLayout(3, 3, 10, 10));
         _player1 = new HumanPlayer("X", 1);
-        _player2 = new HumanPlayer("O", 2);
+        if (isComputer){
+           _player2 = new ComputerPlayer("O", 2);
+        }
+        else {
+           _player2 = new HumanPlayer("O", 2);
+        }
+        
         _activePlayer = _player1;
         _boards = new GamePanel[9];
         _model = new GameBoardModel(e, _player1, _player2);

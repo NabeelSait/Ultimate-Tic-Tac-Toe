@@ -12,7 +12,7 @@ class GameScreen extends JPanel {
     private JButton _forfeitButton;
     private GameBoard _gameBoard;
 
-    GameScreen(EventBus bus) {
+    GameScreen(EventBus bus, boolean isComputer) {
         _bus = bus;
 
         setLayout(new GridBagLayout());
@@ -28,7 +28,7 @@ class GameScreen extends JPanel {
         c.anchor = GridBagConstraints.PAGE_START;
         add(_statusBar, c);
 
-        _gameBoard = new GameBoard(bus);
+        _gameBoard = new GameBoard(bus, isComputer);
         c.gridy = 1;
         c.anchor = GridBagConstraints.CENTER;
         add(_gameBoard, c);

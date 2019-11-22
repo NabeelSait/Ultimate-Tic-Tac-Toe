@@ -12,16 +12,16 @@ public class Game extends JFrame {
     private GameScreen _gameScreen;
     private ReplayScreen _replayScreen;
     private FileManager _fileManager;
+    private EventBus eventBus;
 
     public Game() {
-        EventBus eventBus = new EventBus();
+        eventBus = new EventBus();
         eventBus.register(this);
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 0,0));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         _menu = new Menu(eventBus);
-        _gameScreen = new GameScreen(eventBus);
         _replayScreen = new ReplayScreen(eventBus);
         _fileManager = new FileManager(eventBus);
 
@@ -52,11 +52,13 @@ public class Game extends JFrame {
         // Construct GameBoard and begin playing!
         if (button.getText().compareTo("   Play Against a Computer   ") == 0) {
             getContentPane().remove(_menu);
+            _gameScreen = new GameScreen(eventBus, true);
             getContentPane().add(_gameScreen);
             setGameScreenCharacteristics();
         }
         else if (button.getText().compareTo("Play Against another Player") == 0) {
             getContentPane().remove(_menu);
+            _gameScreen = new GameScreen(eventBus, false);
             getContentPane().add(_gameScreen);
             setGameScreenCharacteristics();
          }

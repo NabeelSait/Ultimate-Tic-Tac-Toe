@@ -21,7 +21,7 @@ class ReplayScreen extends JPanel
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
 
-      _gameBoard = new GameBoard(bus);
+      _gameBoard = new GameBoard(bus, false);
       _gameBoard.closeAllBoards();
       c.gridx = 0;
       c.gridy = 0;
