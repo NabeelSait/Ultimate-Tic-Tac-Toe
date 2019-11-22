@@ -1,6 +1,7 @@
 package UI;
 
 import Model.Replayer;
+import Model.Move;
 import com.google.common.eventbus.EventBus;
 
 import javax.swing.*;
@@ -65,7 +66,10 @@ class ReplayScreen extends JPanel
    }
 
    private void previousMove() {
-      _gameBoard.buttonEvent(_replayer.previousMove());
+      Move current = _replayer.previousMove();
+      Move prev = _replayer.previousMove();
+      Move m = _replayer.nextMove();
+      _gameBoard.undoMove(current, prev);
       if(_replayer.hasPrevMove()) {
          _prev.setEnabled(false);
       }

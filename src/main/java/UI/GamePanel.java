@@ -59,4 +59,13 @@ class GamePanel extends JPanel {
         _buttons[pos].setIcon(new ImageIcon(img));
         closeBoard();
     }
+
+    public void undoMove(Move m)
+    {
+      for (int i = 0; i < 9; i++){
+         if (i == m.getPosition()){
+            _buttons[i].setIcon(null);
+         }
+      }
+    }
 }

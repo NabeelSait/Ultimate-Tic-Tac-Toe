@@ -13,6 +13,7 @@ class GameBoard extends JPanel {
     private Player _player1, _player2, _activePlayer;
 
     GameBoard(EventBus e) {
+        e.register(this);
         setLayout(new GridLayout(3, 3, 10, 10));
         _player1 = new HumanPlayer("X", 1);
         _player2 = new HumanPlayer("O", 2);
@@ -44,8 +45,25 @@ class GameBoard extends JPanel {
         }
     }
 
+    public void undoMove(Move current, Move prev)
+    {
+      for (int i = 0; i < 9; i++) {
+          if (i == prev.getPosition()) {
+              _boards[i].closeBoard();
+          }
+          if (i == current.getPosition()){
+             _boards[i].openBoard();
+          }
+          if (i == current.getBoard()){
+             _boards[i].undoMove(current);
+          }
+      }
+
+    }
+
     @Subscribe
     void buttonEvent(Move m) {
+      System.out.println("Got here");
         if (!_model.checkClosed(m)) {
             for (int i = 0; i < 9; i++) {
                 if (i == m.getPosition()) {
