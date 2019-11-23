@@ -1,6 +1,7 @@
 package UI;
 
-import com.google.common.eventbus.EventBus;
+import Model.Move;
+import com.google.common.eventbus.Subscribe;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -8,12 +9,10 @@ import java.awt.*;
 
 class GameScreen extends JPanel {
     private JTextField _statusBar;
-    private EventBus _bus;
     private JButton _forfeitButton;
     private GameBoard _gameBoard;
 
-    GameScreen(EventBus bus, boolean isComputer) {
-        _bus = bus;
+    GameScreen(boolean isComputer) {
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -28,16 +27,21 @@ class GameScreen extends JPanel {
         c.anchor = GridBagConstraints.PAGE_START;
         add(_statusBar, c);
 
-        _gameBoard = new GameBoard(bus, isComputer);
+        _gameBoard = new GameBoard(isComputer);
         c.gridy = 1;
         c.anchor = GridBagConstraints.CENTER;
         add(_gameBoard, c);
 
         _forfeitButton = new JButton("Forfeit");
-        _forfeitButton.addActionListener(e -> _bus.post(_forfeitButton));
+        _forfeitButton.addActionListener(e -> Bus.getInstance().post(_forfeitButton));
         c.gridy = 2;
         c.anchor = GridBagConstraints.PAGE_END;
         c.insets = new Insets(20,0,0,0);
         add(_forfeitButton, c);
+    }
+
+    @Subscribe
+    public void buttonEvent(final Move m) {
+
     }
 }

@@ -10,12 +10,10 @@ import java.util.ArrayList;
 
 public class FileManager extends JFrame {
    private JFileChooser _chooser;
-   private EventBus _bus;
 
-   FileManager(EventBus bus) {
+   FileManager() {
       _chooser = new JFileChooser();
       _chooser.setCurrentDirectory(new File("./replays"));
-      _bus = bus;
    }
 
    public int saveReplay(ArrayList<Move> moveList) {
@@ -30,7 +28,7 @@ public class FileManager extends JFrame {
       int response = _chooser.showOpenDialog(null);
       if (response == JFileChooser.FILES_ONLY) {
          File file = _chooser.getSelectedFile();
-         _bus.post(file);
+         Bus.getInstance().post(file);
       }
       // if the user cancelled the operation
       else {

@@ -2,7 +2,6 @@ package UI;
 
 import Model.Replayer;
 import Model.Move;
-import com.google.common.eventbus.EventBus;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,16 +11,13 @@ class ReplayScreen extends JPanel
 {
    private JButton _prev, _next, _quit;
    private GameBoard _gameBoard;
-   private EventBus _bus;
    private Replayer _replayer;
 
-   ReplayScreen(EventBus bus) {
-      _bus = bus;
-
+   ReplayScreen() {
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
 
-      _gameBoard = new GameBoard(bus, false);
+      _gameBoard = new GameBoard(false);
       _gameBoard.closeAllBoards();
       c.gridx = 0;
       c.gridy = 0;
@@ -44,7 +40,7 @@ class ReplayScreen extends JPanel
       add(_next, c);
 
       _quit = new JButton("Quit to Menu");
-      _quit.addActionListener(e -> _bus.post(_quit));
+      _quit.addActionListener(e -> Bus.getInstance().post(_quit));
       c.anchor = GridBagConstraints.CENTER;
       c.gridx = 0;
       c.gridy = 2;
@@ -56,7 +52,7 @@ class ReplayScreen extends JPanel
    }
 
    private void nextMove() {
-      _gameBoard.buttonEvent(_replayer.nextMove());
+      _gameBoard.stepMove(_replayer.nextMove());
       if (!_replayer.hasNextMove()) {
          _next.setEnabled(false);
       }
@@ -66,15 +62,15 @@ class ReplayScreen extends JPanel
    }
 
    private void previousMove() {
-      Move prev = _replayer.previousMove();
-      Move pprev = new Move(-1,-1);
       if (_replayer.hasPrevMove()){
-         pprev = _replayer.previousMove();
-         Move m = _replayer.nextMove();
+         Move prev = _replayer.previousMove();
+         _gameBoard.undoMove(prev);
       }
-      _gameBoard.undoMove(prev, pprev);
       if(!_replayer.hasPrevMove()) {
          _prev.setEnabled(false);
+      }
+      if (_replayer.hasNextMove()) {
+         _next.setEnabled(true);
       }
    }
 }

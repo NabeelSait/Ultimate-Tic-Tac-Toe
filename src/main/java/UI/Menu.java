@@ -1,16 +1,11 @@
 package UI;
 
-import com.google.common.eventbus.EventBus;
-
 import javax.swing.*;
 import java.awt.*;
 
 class Menu extends JPanel {
-   private EventBus _bus;
 
-   Menu(EventBus bus) {
-      _bus = bus;
-
+   Menu() {
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
       setPreferredSize(new Dimension(600, 600));
@@ -27,7 +22,7 @@ class Menu extends JPanel {
       add(title,c);
 
       final JButton vsCPU = new JButton("   Play Against a Computer   ");
-      vsCPU.addActionListener(e -> _bus.post(vsCPU));
+      vsCPU.addActionListener(e -> Bus.getInstance().post(vsCPU));
 
       c.gridx = 0;
       c.gridy = 1;
@@ -35,7 +30,7 @@ class Menu extends JPanel {
       add(vsCPU, c);
 
       final JButton vsP = new JButton("Play Against another Player");
-      vsP.addActionListener(e -> _bus.post(vsP));
+      vsP.addActionListener(e -> Bus.getInstance().post(vsP));
 
       c.gridx = 0;
       c.gridy = 2;
@@ -43,7 +38,7 @@ class Menu extends JPanel {
       add(vsP, c);
 
       final JButton replay = new JButton("           Watch a Replay           ");
-      replay.addActionListener(e -> _bus.post(replay));
+      replay.addActionListener(e -> Bus.getInstance().post(replay));
 
       c.gridx = 0;
       c.gridy = 3;

@@ -4,24 +4,19 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.HashMap;
-
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 
 class GamePanel extends JPanel {
     private JButton[] _buttons = new JButton[9];
-    private static int[] pos = new int[9];
-    private int _boardID;;
+    private int _boardID;
 
-    GamePanel(EventBus bus, int boardID) {
+    GamePanel(int boardID) {
+        _boardID = boardID;
         setLayout(new GridLayout(3, 3, 5, 5));
         for (int i = 0; i < 9; i++) {
             _buttons[i] = new JButton();
             add(_buttons[i]);
-            final int _buttonID = i;
-            _buttons[i].addActionListener(e -> bus.post(new Move(_boardID, _buttonID)));
+            final int buttonID = i;
+            _buttons[i].addActionListener(e -> Bus.getInstance().post(new Move(_boardID, buttonID)));
             setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
             setPreferredSize(new Dimension(130, 130));
         }
@@ -39,7 +34,7 @@ class GamePanel extends JPanel {
 
     void openBoard() {
         for (JButton button : _buttons) {
-            if (button.getText().equals("")) {
+            if (button.getIcon() == null) {
                 button.setEnabled(true);
             }
         }
@@ -58,7 +53,7 @@ class GamePanel extends JPanel {
         closeBoard();
     }
 
-    public void undoMove(Move m)
+    void undoMove(Move m)
     {
       for (int i = 0; i < 9; i++){
          if (i == m.getPosition()){
