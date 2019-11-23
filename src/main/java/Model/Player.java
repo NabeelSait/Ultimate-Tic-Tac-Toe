@@ -15,7 +15,7 @@ public abstract class Player {
         return type;
     }
 
-    int getNumber() {
+    public int getNumber() {
         return number;
     }
 

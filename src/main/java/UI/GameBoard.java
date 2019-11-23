@@ -72,6 +72,11 @@ class GameBoard extends JPanel {
         _model.fillSquare(m, _activePlayer);
         _boards[m.getBoard()].fillSquare(m.getPosition(), _activePlayer);
 
+        if(_model.checkWinCon(m, _activePlayer)) {
+            closeAllBoards();
+            return;
+        }
+
         // Is the board that the player was sent to already closed
         if (_model.isClosed(m)) {
             openAllBoards();
@@ -80,6 +85,8 @@ class GameBoard extends JPanel {
             closeAllBoards();
             _boards[m.getPosition()].openBoard();
         }
+
         endTurn();
+        Bus.getInstance().post(_activePlayer);
     }
 }

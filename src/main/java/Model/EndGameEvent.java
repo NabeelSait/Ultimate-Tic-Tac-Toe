@@ -2,15 +2,14 @@ package Model;
 
 public class EndGameEvent
 {
-   public final Player player;
-
-   EndGameEvent()
-   {
-      player = new HumanPlayer("NULL", 0);
-   }
+   private final Player _winner;
 
    EndGameEvent(Player player)
    {
-      this.player = player;
+      this._winner = player;
+   }
+
+   public Player getWinner() {
+      return _winner;
    }
 }

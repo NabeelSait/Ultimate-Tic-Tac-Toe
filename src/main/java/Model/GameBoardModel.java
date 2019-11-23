@@ -28,20 +28,27 @@ public class GameBoardModel implements GameModel {
         if (player.score >= 5) {
             EndGameEvent e = new EndGameEvent(player);
             Bus.getInstance().post(e);
-	    return true;
+            saveGameToFile();
+	        return true;
         } else if (_panelsfilled == 9) {
             if (_player1.score > _player2.score) {
+                saveGameToFile();
                 EndGameEvent e = new EndGameEvent(_player1);
                 Bus.getInstance().post(e);
                 return true;
             } else if (_player2.score > _player1.score) {
+                saveGameToFile();
                 EndGameEvent e = new EndGameEvent(_player2);
                 Bus.getInstance().post(e);
                 return true;
             }
+            else {
+                saveGameToFile();
+                EndGameEvent e = new EndGameEvent(new HumanPlayer("Tie", 3));
+                Bus.getInstance().post(e);
+            }
         }
 	return false;
-  
     }
 
     public void fillSquare(Move m, Player player) {
@@ -52,6 +59,9 @@ public class GameBoardModel implements GameModel {
                 player.score += 1;
                 _panelsfilled++;
                 panel.close();
+            }
+            else if (panel.getSquaresFilled() == 9) {
+                _panelsfilled++;
             }
             this.checkWinCon(m, player);
             _moveList.add(m);
@@ -83,8 +93,8 @@ public class GameBoardModel implements GameModel {
     public boolean boardOpen(int board) {
         return _panels[board].open();
     }
-         
 
-    
-    
+    private void saveGameToFile() {
+
+    }
 }

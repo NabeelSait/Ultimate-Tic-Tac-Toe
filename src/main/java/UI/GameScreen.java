@@ -1,6 +1,7 @@
 package UI;
 
-import Model.Move;
+import Model.EndGameEvent;
+import Model.Player;
 import com.google.common.eventbus.Subscribe;
 
 import javax.swing.*;
@@ -9,15 +10,22 @@ import java.awt.*;
 
 class GameScreen extends JPanel {
     private JTextField _statusBar;
+    private boolean _computerPlayer;
     private JButton _forfeitButton;
-    private GameBoard _gameBoard;
 
-    GameScreen(boolean isComputer) {
+    GameScreen(boolean computerPlayer) {
+        _computerPlayer = computerPlayer;
+        Bus.getInstance().register(this);
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        _statusBar = new JTextField("Player 1's Turn");
+        if(_computerPlayer) {
+            _statusBar = new JTextField("");
+        }
+        else {
+            _statusBar = new JTextField("Player 1's Turn");
+        }
         _statusBar.setEditable(false);
         _statusBar.setBorder(new EmptyBorder(15, 5, 15, 5));
         _statusBar.setFont(new Font("Verdana",Font.PLAIN,25));
@@ -27,10 +35,10 @@ class GameScreen extends JPanel {
         c.anchor = GridBagConstraints.PAGE_START;
         add(_statusBar, c);
 
-        _gameBoard = new GameBoard(isComputer);
+        GameBoard gameBoard = new GameBoard(_computerPlayer);
         c.gridy = 1;
         c.anchor = GridBagConstraints.CENTER;
-        add(_gameBoard, c);
+        add(gameBoard, c);
 
         _forfeitButton = new JButton("Forfeit");
         _forfeitButton.addActionListener(e -> Bus.getInstance().post(_forfeitButton));
@@ -41,7 +49,19 @@ class GameScreen extends JPanel {
     }
 
     @Subscribe
-    public void buttonEvent(final Move m) {
+    public void buttonEvent(Player player) {
+        if(!_computerPlayer)
+        _statusBar.setText("Player " + player.getNumber() + "'s turn");
+    }
 
+    @Subscribe
+    public void endGameEvent(EndGameEvent e) {
+        if(e.getWinner().getNumber() != 3) {
+            _statusBar.setText("Player " + e.getWinner().getNumber() + " has won!");
+        }
+        else {
+            _statusBar.setText("Tie!");
+        }
+        _forfeitButton.setText("Return to Main Menu");
     }
 }

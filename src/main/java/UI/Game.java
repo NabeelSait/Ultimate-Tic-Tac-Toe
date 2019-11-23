@@ -11,7 +11,6 @@ public class Game extends JFrame {
     private Menu _menu;
     private GameScreen _gameScreen;
     private ReplayScreen _replayScreen;
-    private FileManager _fileManager;
 
     public Game() {
         Bus.getInstance().register(this);
@@ -20,19 +19,16 @@ public class Game extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         _menu = new Menu();
-        _replayScreen = new ReplayScreen();
-        _fileManager = new FileManager();
 
         // Default to showing the menu
         getContentPane().add(_menu);
         setMenuCharacteristics();
+        setBounds(250, 250, 600, 600);
     }
 
     private void setMenuCharacteristics() {
         setTitle("Menu");
         setVisible(true);
-        getContentPane().add(_menu);
-        setBounds(250, 250, 600, 600);
     }
 
     private void setGameScreenCharacteristics() {
@@ -62,7 +58,6 @@ public class Game extends JFrame {
          }
         // Go back to the main menu
         else if (button.getText().compareTo("Forfeit") == 0) {
-            System.out.println("got here");
             getContentPane().remove(_gameScreen);
             getContentPane().add(_menu);
             setMenuCharacteristics();
@@ -71,11 +66,19 @@ public class Game extends JFrame {
             repaint();
         }
         else if (button.getText().compareTo("           Watch a Replay           ") == 0) {
-            _fileManager.pickReplay();
+            FileManager fileManager = new FileManager();
+            fileManager.pickReplay();
         }
         else if (button.getText().compareTo("Quit to Menu") == 0) {
-            System.out.println("got here");
             getContentPane().remove(_replayScreen);
+            getContentPane().add(_menu);
+            setMenuCharacteristics();
+            invalidate();
+            validate();
+            repaint();
+        }
+        else if (button.getText().compareTo("Return to Main Menu") == 0) {
+            getContentPane().remove(_gameScreen);
             getContentPane().add(_menu);
             setMenuCharacteristics();
             invalidate();
@@ -87,10 +90,15 @@ public class Game extends JFrame {
     @Subscribe
     public void replaySelected(File replayFile) {
         getContentPane().remove(_menu);
-        getContentPane().add(_replayScreen);
+        _replayScreen = new ReplayScreen();
         _replayScreen.loadReplay(replayFile);
+        getContentPane().add(_replayScreen);
+        invalidate();
+        validate();
+        repaint();
         setReplayCharacteristics();
     }
+
     @Subscribe
     public void endGame(int e) {
 
