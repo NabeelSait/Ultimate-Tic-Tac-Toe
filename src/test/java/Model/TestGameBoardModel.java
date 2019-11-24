@@ -12,11 +12,11 @@ public class TestGameBoardModel {
       Player p1 = new HumanPlayer("X", 1);
       Player p2 = new HumanPlayer("O", 2);
       GameBoardModel model = new GameBoardModel(p1, p2);
-      assertEquals(model.getPanelsFilled(), 0);      
+      assertEquals(model.getPanelsFilled(), 0);
 
 
    }
-   
+
    @Test
    public void testCheckWinCon1() //One player reaches 5
    {
@@ -41,9 +41,9 @@ public class TestGameBoardModel {
       p1.score = 3;
       p2.score = 2;
       assertTrue(model.checkWinCon(mv, p1));
-   
+
    }
-   
+
    @Test
    public void testCheckWinCon3() //Meets no 'win' consditions, but will end the game. Should return true.
    {
@@ -54,8 +54,8 @@ public class TestGameBoardModel {
       GameBoardModel model = new GameBoardModel(p1, p2);
       model.setPanelsFilled(9);
       Move mv = new Move(0, 0);
-      assertFalse(model.checkWinCon(mv, p1));
-   
+      assertTrue(model.checkWinCon(mv, p1));
+
    }
 
 
@@ -68,12 +68,12 @@ public class TestGameBoardModel {
       Move mv1 = new Move(0, 0);
       model.fillSquare(mv1, p1);
       assertTrue(model.boardOpen(mv1.getBoard()));
-   
+
 
    }
 
    //Note that testing for a closed panel assumes panel.checkWinCon(...) works
-   
+
    @Test
    public void TestCheckClosed()
    {
@@ -90,7 +90,7 @@ public class TestGameBoardModel {
    }
 
    @Test
-   public void TestGetMoveList() //prob didn't need this 
+   public void TestGetMoveList() //prob didn't need this
    {
       Player p1 = new HumanPlayer("X", 1);
       Player p2 = new HumanPlayer("O", 2);

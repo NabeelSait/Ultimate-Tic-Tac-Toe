@@ -3,6 +3,9 @@ package Model;
 import UI.Bus;
 
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.sql.Timestamp;
+import java.io.IOException;
 
 @SuppressWarnings("ALL")
 public class GameBoardModel implements GameModel {
@@ -23,13 +26,13 @@ public class GameBoardModel implements GameModel {
     }
 
     //posts EndGameEvent object
-    public boolean checkWinCon(Move m, Player player) {
+    public boolean checkWinCon(Move m, Player player){
         //Checks for direct win
         if (player.score >= 5) {
             EndGameEvent e = new EndGameEvent(player);
             Bus.getInstance().post(e);
             saveGameToFile();
-	        return true;
+	         return true;
         } else if (_panelsfilled == 9) {
             if (_player1.score > _player2.score) {
                 saveGameToFile();
@@ -46,16 +49,17 @@ public class GameBoardModel implements GameModel {
                 saveGameToFile();
                 EndGameEvent e = new EndGameEvent(new HumanPlayer("Tie", 3));
                 Bus.getInstance().post(e);
+                return true;
             }
         }
 	return false;
     }
 
-    public void fillSquare(Move m, Player player) {
+    public void fillSquare(Move m, Player player){
         GamePanelModel panel = _panels[m.getBoard()];
         if (panel.open()) {
             panel.fillSquare(m.getPosition(), player);
-            if (panel.checkWinCon(m.getPosition(), player)) {
+            if (panel.checkWinCon(m.getPosition(),player)) {
                 player.score += 1;
                 _panelsfilled++;
                 panel.close();
@@ -78,7 +82,7 @@ public class GameBoardModel implements GameModel {
 
 
     //Some methods for Unit Testing
-    
+
     public int getPanelsFilled()
     {
        return _panelsfilled;
@@ -94,7 +98,14 @@ public class GameBoardModel implements GameModel {
         return _panels[board].open();
     }
 
-    private void saveGameToFile() {
-
+    private void saveGameToFile(){
+      // Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+      // String filename = "/replays/" + String.valueOf(timestamp) + ".replay";
+      // FileWriter fw = new FileWriter(filename);
+      // for (Move m : this._moveList)
+      // {
+      //     final String out = String.valueOf(m.getBoard()) + " " + String.valueOf(m.getPosition()) + "\n";
+      //     fw.write(out);
+      // }
     }
 }

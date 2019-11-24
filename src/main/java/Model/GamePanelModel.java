@@ -28,29 +28,47 @@ class GamePanelModel {
             return false;
         }
 
-        //Horizontal Right
-        if (pos + 1 <= 8 & pos + 1 >= 0 && _squares[pos + 1].equals(player.getType())) {
-            if (pos + 2 <= 8 && _squares[pos + 2].equals(player.getType())) {
-                return true;
+        //Side Horizontals
+        if (_squares[4].equals(player.getType())) {
+            if (_squares[3].equals(player.getType())) {
+               if (_squares[5].equals(player.getType())) {
+                  return true;
+               }
+            }
+            else if (_squares[1].equals(player.getType())) {
+                if (_squares[7].equals(player.getType())) {
+                    return true;
+                }
             }
         }
-        //Horizontal Left
-        else if (pos - 1 <= 8 && pos - 1 >= 0 && _squares[pos - 1].equals(player.getType())) {
-            if (pos - 2 >= 0 && _squares[pos - 2].equals(player.getType())) {
-                return true;
+        else if (_squares[1].equals(player.getType())) {
+            if (_squares[0].equals(player.getType())) {
+               if (_squares[2].equals(player.getType())) {
+                  return true;
+               }
             }
         }
-        //Vertical Up
-        else if (pos - 3 >= 0 && _squares[pos - 3].equals(player.getType())) {
-            if (pos - 6 >= 0 && _squares[pos - 6].equals(player.getType())) {
+        else if(_squares[7].equals(player.getType())) {
+           if (_squares[6].equals(player.getType())) {
+             if (_squares[8].equals(player.getType())) {
                 return true;
+             }
+          }
+        }
+        //Side Verticals
+        else if (_squares[3].equals(player.getType())) {
+            if (_squares[0].equals(player.getType())) {
+                if (_squares[6].equals(player.getType())) {
+                   return true;
+                }
             }
         }
-        //Vertical Down
-        else if (pos + 3 <= 8 && _squares[pos + 3].equals(player.getType())) {
-            if (pos + 6 <= 8 && _squares[pos + 6].equals(player.getType())) {
+        else if (_squares[5].equals(player.getType())) {
+           if (_squares[2].equals(player.getType())) {
+             if(_squares[8].equals(player.getType())) {
                 return true;
-            }
+             }
+          }
         }
         //Diagonals
         if (_squares[4].equals(player.getType())) {

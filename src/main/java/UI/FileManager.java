@@ -5,8 +5,13 @@ import com.google.common.eventbus.EventBus;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
+import java.io.*;
+
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class FileManager extends JFrame {
    private JFileChooser _chooser;
@@ -16,7 +21,21 @@ public class FileManager extends JFrame {
       _chooser.setCurrentDirectory(new File("./replays"));
    }
 
-   public int saveReplay(ArrayList<Move> moveList) {
+   public static int saveReplay(ArrayList<Move> moveList) throws IOException{
+      String timestamp = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(new Date());
+      String filename = "replays/" + timestamp + ".replay";
+      System.out.println(filename);
+
+      Charset utf8 = StandardCharsets.UTF_8;
+      Writer writer = new BufferedWriter( new OutputStreamWriter(new FileOutputStream(filename), utf8));
+      for (Move m : moveList)
+      {
+          writer.write(String.valueOf(m.getBoard()));
+          System.out.println(m.getBoard());
+          writer.write(" ");
+          writer.write(String.valueOf(m.getPosition()));
+          System.out.println(m.getPosition());
+      }
       return 0;
    }
 

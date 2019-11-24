@@ -99,8 +99,8 @@ public class Game extends JFrame {
         setReplayCharacteristics();
     }
 
-    @Subscribe
-    public void endGame(int e) {
-
-    }
+    // @Subscribe
+    // public void endGame(int e) {
+    //
+    // }
 }

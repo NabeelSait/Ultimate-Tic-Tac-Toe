@@ -2,6 +2,8 @@ package UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import Model.*;
 import com.google.common.eventbus.Subscribe;
@@ -67,8 +69,11 @@ class GameBoard extends JPanel {
         }
     }
 
+    public ArrayList<Move> getMoveList(){
+      return _model.getMoveList();
+   }
     @Subscribe
-    public void buttonEvent(final Move m) {
+    public void buttonEvent(final Move m) throws IOException {
         _model.fillSquare(m, _activePlayer);
         _boards[m.getBoard()].fillSquare(m.getPosition(), _activePlayer);
 

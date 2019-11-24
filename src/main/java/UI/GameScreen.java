@@ -7,11 +7,13 @@ import com.google.common.eventbus.Subscribe;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.IOException;
 
 class GameScreen extends JPanel {
     private JTextField _statusBar;
     private boolean _computerPlayer;
     private JButton _forfeitButton;
+    private GameBoard _gameBoard;
 
     GameScreen(boolean computerPlayer) {
         _computerPlayer = computerPlayer;
@@ -35,10 +37,10 @@ class GameScreen extends JPanel {
         c.anchor = GridBagConstraints.PAGE_START;
         add(_statusBar, c);
 
-        GameBoard gameBoard = new GameBoard(_computerPlayer);
+        _gameBoard = new GameBoard(_computerPlayer);
         c.gridy = 1;
         c.anchor = GridBagConstraints.CENTER;
-        add(gameBoard, c);
+        add(_gameBoard, c);
 
         _forfeitButton = new JButton("Forfeit");
         _forfeitButton.addActionListener(e -> Bus.getInstance().post(_forfeitButton));
@@ -55,7 +57,7 @@ class GameScreen extends JPanel {
     }
 
     @Subscribe
-    public void endGameEvent(EndGameEvent e) {
+    public void endGameEvent(EndGameEvent e) throws IOException{
         if(e.getWinner().getNumber() != 3) {
             _statusBar.setText("Player " + e.getWinner().getNumber() + " has won!");
         }
@@ -63,5 +65,6 @@ class GameScreen extends JPanel {
             _statusBar.setText("Tie!");
         }
         _forfeitButton.setText("Return to Main Menu");
+        FileManager.saveReplay(_gameBoard.getMoveList());
     }
 }
