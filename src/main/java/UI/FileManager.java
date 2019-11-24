@@ -30,11 +30,9 @@ public class FileManager extends JFrame {
       Writer writer = new BufferedWriter( new OutputStreamWriter(new FileOutputStream(filename), utf8));
       for (Move m : moveList)
       {
-          writer.write(String.valueOf(m.getBoard()));
-          System.out.println(m.getBoard());
+          writer.write(String.valueOf(m.getBoard()), 0, String.valueOf(m.getBoard()).length());
           writer.write(" ");
-          writer.write(String.valueOf(m.getPosition()));
-          System.out.println(m.getPosition());
+          writer.write(String.valueOf(m.getPosition()), 0, String.valueOf(m.getPosition()).length());
       }
       return 0;
    }

@@ -6,10 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 
 class GamePanel extends JPanel {
-    private JButton[] _buttons = new JButton[9];
+    private JButton[] _buttons;
     private int _boardID;
 
     GamePanel(int boardID) {
+        _buttons =  = new JButton[9];
         _boardID = boardID;
         setLayout(new GridLayout(3, 3, 5, 5));
         for (int i = 0; i < 9; i++) {
