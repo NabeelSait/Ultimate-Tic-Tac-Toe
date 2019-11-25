@@ -14,6 +14,7 @@ class GameBoard extends JPanel {
     private Player _player1, _player2, _activePlayer;
     private boolean _hasComputer;
 
+
     GameBoard(boolean hasComputer) {
         Bus.getInstance().register(this);
         setLayout(new GridLayout(3, 3, 10, 10));
@@ -75,7 +76,7 @@ class GameBoard extends JPanel {
         }
     }
 
-    public ArrayList<Move> getMoveList(){
+    ArrayList<Move> getMoveList(){
       return _model.getMoveList();
    }
 
@@ -85,6 +86,7 @@ class GameBoard extends JPanel {
         _boards[m.getBoard()].fillSquare(m.getPosition(), _activePlayer);
 
         if(_model.checkWinCon(m, _activePlayer)) {
+            Bus.getInstance().unregister(this);
             closeAllBoards();
             return;
         }
