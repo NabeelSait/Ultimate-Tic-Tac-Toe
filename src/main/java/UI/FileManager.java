@@ -23,17 +23,27 @@ public class FileManager extends JFrame {
 
    public static int saveReplay(ArrayList<Move> moveList) throws IOException{
       String timestamp = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(new Date());
-      String filename = "replays/" + timestamp + ".replay";
+      String filename = "replays/" + timestamp + ".txt";
       System.out.println(filename);
 
-      Charset utf8 = StandardCharsets.UTF_8;
-      Writer writer = new BufferedWriter( new OutputStreamWriter(new FileOutputStream(filename), utf8));
+      File file = new File(filename);
+
+      if (file.createNewFile()) {
+          System.out.println("File is created!");
+      } else {
+          System.out.println("File already exists.");
+      }
+
+      FileWriter writer = new FileWriter(file);
+      BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), "UTF-8"));
       for (Move m : moveList)
       {
-          writer.write(String.valueOf(m.getBoard()), 0, String.valueOf(m.getBoard()).length());
-          writer.write(" ");
-          writer.write(String.valueOf(m.getPosition()), 0, String.valueOf(m.getPosition()).length());
+          out.write(String.valueOf(m.getBoard()));
+          out.write(" ");
+          out.write(String.valueOf(m.getPosition()));
+          out.write(" \n");
       }
+      out.close();
       return 0;
    }
 
