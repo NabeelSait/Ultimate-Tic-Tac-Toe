@@ -67,7 +67,7 @@ public class TestGameBoardModel {
       GameBoardModel model = new GameBoardModel(p1, p2);
       Move mv1 = new Move(0, 0);
       model.fillSquare(mv1, p1);
-      assertTrue(model.boardOpen(mv1.getBoard()));
+      assertTrue(model.isOpen(mv1.getBoard()));
 
 
    }
@@ -86,7 +86,7 @@ public class TestGameBoardModel {
       model.fillSquare(mv1, p1);
       model.fillSquare(mv2, p1);
       model.fillSquare(mv3, p1);
-      assertTrue(model.isClosed(mv1));
+      assertTrue(!model.isOpen(mv1.getPosition()));
    }
 
    @Test

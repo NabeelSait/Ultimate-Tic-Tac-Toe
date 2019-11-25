@@ -59,6 +59,7 @@ public class Game extends JFrame {
         // Go back to the main menu
         else if (button.getText().compareTo("Forfeit") == 0) {
             getContentPane().remove(_gameScreen);
+            _menu = new Menu();
             getContentPane().add(_menu);
             setMenuCharacteristics();
             invalidate();
@@ -71,6 +72,7 @@ public class Game extends JFrame {
         }
         else if (button.getText().compareTo("Quit to Menu") == 0) {
             getContentPane().remove(_replayScreen);
+            _menu = new Menu();
             getContentPane().add(_menu);
             setMenuCharacteristics();
             invalidate();
@@ -79,6 +81,7 @@ public class Game extends JFrame {
         }
         else if (button.getText().compareTo("Return to Main Menu") == 0) {
             getContentPane().remove(_gameScreen);
+            _menu = new Menu();
             getContentPane().add(_menu);
             setMenuCharacteristics();
             invalidate();
@@ -98,9 +101,4 @@ public class Game extends JFrame {
         repaint();
         setReplayCharacteristics();
     }
-
-    // @Subscribe
-    // public void endGame(int e) {
-    //
-    // }
 }

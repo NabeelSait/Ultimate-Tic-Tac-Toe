@@ -58,9 +58,15 @@ class GameScreen extends JPanel {
 
     @Subscribe
     public void endGameEvent(EndGameEvent e) throws IOException{
-        if(e.getWinner().getNumber() != 3) {
-            _statusBar.setText("Player " + e.getWinner().getNumber() + " has won!");
+        if (e.getWinner().getNumber() == 1) {
+            _statusBar.setText("You won!");
         }
+        if (e.getWinner().getNumber() == 2) {
+            _statusBar.setText("You lose!");
+        }
+//        if(e.getWinner().getNumber() != 3) {
+//            _statusBar.setText("Player " + e.getWinner().getNumber() + " has won!");
+//        }
         else {
             _statusBar.setText("Tie!");
         }

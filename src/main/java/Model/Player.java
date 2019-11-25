@@ -18,7 +18,4 @@ public abstract class Player {
     public int getNumber() {
         return number;
     }
-
-    public abstract Move takeTurn(int board);
-
 }

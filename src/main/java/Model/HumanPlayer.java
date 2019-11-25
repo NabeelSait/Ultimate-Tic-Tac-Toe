@@ -15,10 +15,4 @@ public class HumanPlayer extends Player {
         return _name;
     }
 
-    public Move takeTurn(int board)
-    {
-      return new Move(board,1);
-    }
-
-
 }//end class

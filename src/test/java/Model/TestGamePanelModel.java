@@ -8,7 +8,7 @@ public class TestGamePanelModel {
     @Test
     public void testConstructor() {
         GamePanelModel model = new GamePanelModel();
-        assertTrue(model.open());
+        assertTrue(model.isOpen());
     }
 
     @Test
