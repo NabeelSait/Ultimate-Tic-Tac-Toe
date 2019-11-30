@@ -1,18 +1,15 @@
 package Model;
 
+/**
+ * Human Player
+ */
 public class HumanPlayer extends Player {
-    private String _name;
-
-    public HumanPlayer(String t, int n) {
-        super(t, n);
+    /**
+     * Human Player has no special extension of the abstract Player class
+     * @param shape X | O
+     * @param id playerID
+     */
+    public HumanPlayer(String shape, int id) {
+        super(shape, id);
     }
-
-    void setName(String name) {
-        _name = name;
-    }
-
-    String getName() {
-        return _name;
-    }
-
-}//end class
+}

@@ -1,21 +1,37 @@
 package Model;
 
+/**
+ * Abstract class for a PLayer
+ */
 public abstract class Player {
-    private String type;
-    private int number;
+    private String _shape;
+    private int _id;
     int score;
 
-    public Player(String t, int n) {
-        type = t;
-        number = n;
+    /**
+     * Basic Constructor
+     * @param shape x | 0
+     * @param n id
+     */
+    public Player(String shape, int n) {
+        _shape = shape;
+        _id = n;
         score = 0;
     }
 
-    public String getType() {
-        return type;
+    /**
+     * Basic getting for Player shape
+     * @return X | O
+     */
+    public String getShape() {
+        return _shape;
     }
 
-    public int getNumber() {
-        return number;
+    /**
+     * Basic getter for player id
+     * @return 0 | 1
+     */
+    public int get_id() {
+        return _id;
     }
 }

@@ -13,15 +13,26 @@ import java.text.SimpleDateFormat;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * IO Handler
+ */
 public class FileManager extends JFrame {
    private JFileChooser _chooser;
 
+   /**
+    * Basic constructor
+    */
    FileManager() {
       _chooser = new JFileChooser();
       _chooser.setCurrentDirectory(new File("./replays"));
    }
 
-   public static int saveReplay(ArrayList<Move> moveList) throws IOException{
+   /**
+    * Save an list of moves to a file
+    * @param moveList Array list of moves from a game in sequential order
+    * @throws IOException thrown when the file cannot be created or wrote into
+    */
+   static void saveReplay(ArrayList<Move> moveList) throws IOException {
       String timestamp = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(new Date());
       String filename = "replays/" + timestamp + ".txt";
       System.out.println(filename);
@@ -34,8 +45,7 @@ public class FileManager extends JFrame {
           System.out.println("File already exists.");
       }
 
-      FileWriter writer = new FileWriter(file);
-      BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), "UTF-8"));
+      BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8));
       for (Move m : moveList)
       {
           out.write(String.valueOf(m.getBoard()));
@@ -44,13 +54,11 @@ public class FileManager extends JFrame {
           out.write(" \n");
       }
       out.close();
-      return 0;
    }
 
-   public String openReplay() {
-      return "String";
-   }
-
+   /**
+    * Select a replay from JFileChooser
+    */
    void pickReplay() {
       int response = _chooser.showOpenDialog(null);
       if (response == JFileChooser.FILES_ONLY) {

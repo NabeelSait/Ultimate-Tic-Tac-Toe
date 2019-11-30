@@ -9,14 +9,23 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * Screen container
+ */
 class GameScreen extends JPanel {
     private JTextField _statusBar;
     private boolean _computerPlayer;
     private JButton _forfeitButton;
     private GameBoard _gameBoard;
 
+    /**
+     * Basic Constructor
+     * @param computerPlayer denotes if a computer player is required
+     */
     GameScreen(boolean computerPlayer) {
         _computerPlayer = computerPlayer;
+
+        // Register with EventBus to use it
         Bus.getInstance().register(this);
 
         setLayout(new GridBagLayout());
@@ -50,23 +59,32 @@ class GameScreen extends JPanel {
         add(_forfeitButton, c);
     }
 
+    /**
+     * Listen for a button event to toggle the statusbar's text
+     * @param player Player whose turn it is
+     */
     @Subscribe
     public void buttonEvent(Player player) {
         if(!_computerPlayer)
-        _statusBar.setText("Player " + player.getNumber() + "'s turn");
+            _statusBar.setText("Player " + player.get_id() + "'s turn");
     }
 
+    /**
+     * Listen for an EndGameEvent to be posted to EventBus
+     * Save a replay, offer to return to menu
+     * @param e EndGameEvent
+     * @throws IOException unable to create, write into, or save file. Shouldn't happen unless rwx attributes were
+     * externally set
+     */
     @Subscribe
     public void endGameEvent(EndGameEvent e) throws IOException{
-        if (e.getWinner().getNumber() == 1) {
+        if (e.getWinner().get_id() == 1) {
             _statusBar.setText("You won!");
         }
-        if (e.getWinner().getNumber() == 2) {
+        if (e.getWinner().get_id() == 2) {
             _statusBar.setText("You lose!");
         }
-//        if(e.getWinner().getNumber() != 3) {
-//            _statusBar.setText("Player " + e.getWinner().getNumber() + " has won!");
-//        }
+
         else {
             _statusBar.setText("Tie!");
         }

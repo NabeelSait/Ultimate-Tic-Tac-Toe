@@ -5,10 +5,17 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * An individual tic-tac-toe board UI
+ */
 class GamePanel extends JPanel {
     private JButton[] _buttons;
     private int _boardID;
 
+    /**
+     * Default Constrructor
+     * @param boardID Which board this is, used to post move to EventBus
+     */
     GamePanel(int boardID) {
         _buttons = new JButton[9];
         _boardID = boardID;
@@ -23,16 +30,26 @@ class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Getter for Board ID
+     * @return int BoardID 0-8
+     */
     public int getBoardID() {
         return _boardID;
     }
 
+    /**
+     * Close the board by disabling all buttons
+     */
     void closeBoard() {
         for (JButton button : _buttons) {
             button.setEnabled(false);
         }
     }
 
+    /**
+     * Open the board by enabling all button that are currently not occupied
+     */
     void openBoard() {
         for (JButton button : _buttons) {
             if (button.getIcon() == null) {
@@ -41,10 +58,15 @@ class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Fill the square with the player's shape
+     * @param pos position to fill
+     * @param player player to assign to pos
+     */
     void fillSquare(int pos, Player player) {
         //TODO: Load these once for all boards instead of at every move
         Image img;
-        if(player.getType().compareTo("O") == 0) {
+        if(player.getShape().compareTo("O") == 0) {
             img = new ImageIcon("./.icons/o.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         }
         else {
@@ -54,12 +76,12 @@ class GamePanel extends JPanel {
         closeBoard();
     }
 
-    void undoMove(Move m)
+    /**
+     * Undo a move
+     * @param buttonID 0-8 pos to undo move
+     */
+    void undoMove(int buttonID)
     {
-      for (int i = 0; i < 9; i++){
-         if (i == m.getPosition()){
-            _buttons[i].setIcon(null);
-         }
-      }
+        _buttons[buttonID].setIcon(null);
     }
 }

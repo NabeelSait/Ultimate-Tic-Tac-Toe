@@ -3,9 +3,16 @@ package UI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Begin game menu
+ */
 class Menu extends JPanel {
 
+   /**
+    * Basic constructor
+    */
    Menu() {
+      Bus.getInstance().register(this);
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
       setPreferredSize(new Dimension(600, 600));

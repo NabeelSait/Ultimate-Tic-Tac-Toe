@@ -7,12 +7,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Game Analysis screen
+ */
 class ReplayScreen extends JPanel
 {
    private JButton _prev, _next, _quit;
    private GameBoard _gameBoard;
    private Replayer _replayer;
 
+   /**
+    * Basic Constructor
+    */
    ReplayScreen() {
       setLayout(new GridBagLayout());
       GridBagConstraints c = new GridBagConstraints();
@@ -47,10 +53,18 @@ class ReplayScreen extends JPanel
       add(_quit, c);
    }
 
+   /**
+    * Load a replay file
+    * @param replayFile File with a replay in it
+    */
    void loadReplay(File replayFile) {
       _replayer = new Replayer(replayFile);
    }
 
+   /**
+    * Apply the next move
+    * Check to update buttons
+    */
    private void nextMove() {
       _gameBoard.stepMove(_replayer.nextMove());
       if (!_replayer.hasNextMove()) {
@@ -61,6 +75,10 @@ class ReplayScreen extends JPanel
       }
    }
 
+   /**
+    * Take back the latest move
+    * Check to update buttons
+    */
    private void previousMove() {
       if (_replayer.hasPrevMove()){
          Move prev = _replayer.previousMove();

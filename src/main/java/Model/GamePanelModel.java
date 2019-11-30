@@ -2,138 +2,198 @@ package Model;
 
 import java.util.ArrayList;
 
+/**
+ * Model for an individual Panel (tic tac toe board)
+ */
 class GamePanelModel {
     private String[] _squares;
     private int _squaresFilled;
-    private boolean _won;
+    private Player _winner;
     private boolean _playable;
-    // player can make a move here at this time
 
+    /**
+     * Creates and populates member variables
+     */
     GamePanelModel() {
+        // Fill _squares with empty string
         _squares = new String[9];
         for (int i = 0; i < 9; i++) {
             _squares[i] = "";
         }
-        _won = false;
+
+        // Set rest of variables to defaulted values
+        _winner = null;
         _squaresFilled = 0;
         _playable = true;
     }
 
+    /**
+     * Populate a square with player's type
+     * @param position position to fill
+     * @param player Player who made the move
+     */
     void fillSquare(int position, Player player) {
-        _squares[position] = player.getType();
+        _squares[position] = player.getShape();
         _squaresFilled++;
+
+        // Check to see if this move made the player win the board
+        checkWinCon(position, player);
     }
 
-    boolean checkWinCon(int pos, Player player) {
+    /**
+     * Check if a player one, stemming from pos
+     * If the player did win this board, close it.
+     * @param pos position to check around for three in a row
+     * @param player Player to check for
+     */
+    private void checkWinCon(int pos, Player player) {
 
         //Checks for ties
         if (_squaresFilled == 9) {
-            _won = true;
-            return false;
+            _winner = player;
         }
 
         //Side Horizontals
-        if (_squares[4].equals(player.getType())) {
-            if (_squares[3].equals(player.getType())) {
-               if (_squares[5].equals(player.getType())) {
-                   _won = true;
-                  return true;
+        if (_squares[4].equals(player.getShape())) {
+            if (_squares[3].equals(player.getShape())) {
+               if (_squares[5].equals(player.getShape())) {
+                   _winner = player;
+                   close();
                }
             }
-            else if (_squares[1].equals(player.getType())) {
-                if (_squares[7].equals(player.getType())) {
-                    _won = true;
-                    return true;
+            else if (_squares[1].equals(player.getShape())) {
+                if (_squares[7].equals(player.getShape())) {
+                    _winner = player;
+                    close();
                 }
             }
         }
-        else if (_squares[1].equals(player.getType())) {
-            if (_squares[0].equals(player.getType())) {
-               if (_squares[2].equals(player.getType())) {
-                   _won = true;
-                  return true;
+        else if (_squares[1].equals(player.getShape())) {
+            if (_squares[0].equals(player.getShape())) {
+               if (_squares[2].equals(player.getShape())) {
+                   _winner = player;
+                   close();
                }
             }
         }
-        else if(_squares[7].equals(player.getType())) {
-           if (_squares[6].equals(player.getType())) {
-             if (_squares[8].equals(player.getType())) {
-                 _won = true;
-                return true;
+        else if(_squares[7].equals(player.getShape())) {
+           if (_squares[6].equals(player.getShape())) {
+             if (_squares[8].equals(player.getShape())) {
+                 _winner = player;
+                 close();
              }
           }
         }
         //Side Verticals
-        else if (_squares[3].equals(player.getType())) {
-            if (_squares[0].equals(player.getType())) {
-                if (_squares[6].equals(player.getType())) {
-                    _won = true;
-                   return true;
+        else if (_squares[3].equals(player.getShape())) {
+            if (_squares[0].equals(player.getShape())) {
+                if (_squares[6].equals(player.getShape())) {
+                    _winner = player;
+                    close();
                 }
             }
         }
-        else if (_squares[5].equals(player.getType())) {
-           if (_squares[2].equals(player.getType())) {
-             if(_squares[8].equals(player.getType())) {
-                 _won = true;
-                return true;
+        else if (_squares[5].equals(player.getShape())) {
+           if (_squares[2].equals(player.getShape())) {
+             if(_squares[8].equals(player.getShape())) {
+                 _winner = player;
+                 close();
              }
           }
         }
         //Diagonals
-        if (_squares[4].equals(player.getType())) {
-            if (pos == 0 && _squares[8].equals(player.getType())) //Bottom Left to Top Right
+        if (_squares[4].equals(player.getShape())) {
+            if (pos == 0 && _squares[8].equals(player.getShape())) //Bottom Left to Top Right
             {
-                _won = true;
-                return true;
+                _winner = player;
+                close();
             }
-            else if (pos == 8 && _squares[0].equals(player.getType())) {
-                _won = true;
-                return true;
+            else if (pos == 8 && _squares[0].equals(player.getShape())) {
+                _winner = player;
+                close();
             }
-            else if (pos == 2 & _squares[6].equals(player.getType()))//Bottom Right to Top Left
+            else if (pos == 2 & _squares[6].equals(player.getShape()))//Bottom Right to Top Left
             {
-                _won = true;
-                return true;
+                _winner = player;
+                close();
             }
-            else if(pos == 6 & _squares[2].equals(player.getType())) {
-                _won = true;
-                return true;
+            else if(pos == 6 & _squares[2].equals(player.getShape())) {
+                _winner = player;
+                close();
             }
         }
-        return false;
     }
 
+    /**
+     * Getter for winner
+     * @return Player (or null)
+     */
+    Player getWinner() {
+        return _winner;
+    }
+
+    /**
+     * Is the board full?
+     * @return true if board is full
+     */
+    boolean isFull() {
+        return _squaresFilled == 9;
+    }
+
+    /**
+     * Is the board open?
+     * @return true if open, false otherwise
+     */
     boolean isOpen() {
-//        if (_won || _squaresFilled == 9) {
-//            return false;
-//        }
         return _playable;
     }
 
-    boolean isWonOrFull() {
-        return _won || _squaresFilled == 9;
+    /**
+     * Is the board won?
+     * @return true if won, false otherwise
+     */
+    boolean isWon() {
+        return _winner != null;
     }
 
+    /**
+     * Open the board, if the board is not in a terminal state
+     */
     void open() {
-        if (!_won && _squaresFilled != 9) {
+        if (!isWon() && !isFull()) {
             _playable = true;
         }
     }
 
+    /**
+     * Close the board
+     */
     void close() {
         _playable = false;
     }
 
+    /**
+     * Getter for a particular square's value
+     * @param position position of square
+     * @return String of either X, O, or null.
+     */
     String getSquare(int position) {
         return _squares[position];
     }
 
+    /**
+     * Get the number of squares currently filled
+     * @return number of squares filled
+     */
     int getSquaresFilled()
     {
        return _squaresFilled;
     }
 
+    /**
+     * get the unmarked squares
+     * @return ArrayList of unmarked square indices
+     */
     ArrayList<Integer> getOpenSquares() {
         ArrayList<Integer> openSquares = new ArrayList<>();
         for(int i = 0; i < 9; i++) {

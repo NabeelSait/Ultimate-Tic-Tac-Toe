@@ -1,6 +1,5 @@
 package Model;
 
-import com.google.common.eventbus.EventBus;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -23,9 +22,8 @@ public class TestGameBoardModel {
       Player p1 = new HumanPlayer("X", 1);
       Player p2 = new HumanPlayer("O", 2);
       GameBoardModel model = new GameBoardModel(p1, p2);
-      Move mv = new Move(0, 0);
       p1.score = 5;
-      assertTrue(model.checkWinCon(mv, p1));
+      assertTrue(model.checkWinCon(p1));
 
 
    }
@@ -36,11 +34,10 @@ public class TestGameBoardModel {
       Player p1 = new HumanPlayer("X", 1);
       Player p2 = new HumanPlayer("O", 2);
       GameBoardModel model = new GameBoardModel(p1, p2);
-      model.setPanelsFilled(9);
-      Move mv = new Move(0, 0);
+      model.setPanelsFilled();
       p1.score = 3;
       p2.score = 2;
-      assertTrue(model.checkWinCon(mv, p1));
+      assertTrue(model.checkWinCon(p1));
 
    }
 
@@ -52,9 +49,8 @@ public class TestGameBoardModel {
       p1.score = 3;
       p2.score = 3;
       GameBoardModel model = new GameBoardModel(p1, p2);
-      model.setPanelsFilled(9);
-      Move mv = new Move(0, 0);
-      assertTrue(model.checkWinCon(mv, p1));
+      model.setPanelsFilled();
+      assertTrue(model.checkWinCon(p1));
 
    }
 
@@ -68,8 +64,6 @@ public class TestGameBoardModel {
       Move mv1 = new Move(0, 0);
       model.fillSquare(mv1, p1);
       assertTrue(model.isOpen(mv1.getBoard()));
-
-
    }
 
    //Note that testing for a closed panel assumes panel.checkWinCon(...) works
@@ -86,7 +80,7 @@ public class TestGameBoardModel {
       model.fillSquare(mv1, p1);
       model.fillSquare(mv2, p1);
       model.fillSquare(mv3, p1);
-      assertTrue(!model.isOpen(mv1.getPosition()));
+      assertFalse(model.isOpen(mv1.getPosition()));
    }
 
    @Test

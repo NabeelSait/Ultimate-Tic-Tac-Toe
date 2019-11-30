@@ -1,18 +1,24 @@
 package UI;
 
-import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Container for the entire Game Screen
+ */
 public class Game extends JFrame {
     private Menu _menu;
     private GameScreen _gameScreen;
     private ReplayScreen _replayScreen;
 
+    /**
+     * Basic constructor
+     */
     public Game() {
+        // Register with EventBus so that it may post to it
         Bus.getInstance().register(this);
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 0,0));
@@ -26,21 +32,37 @@ public class Game extends JFrame {
         setBounds(250, 250, 600, 600);
     }
 
+    /**
+     * Helper method to set window characteristics
+     */
     private void setMenuCharacteristics() {
         setTitle("Menu");
         setVisible(true);
     }
 
+    /**
+     * Helper method to set window characteristics
+     */
     private void setGameScreenCharacteristics() {
         setTitle("Ultimate Tic Tac Toe");
         setVisible(true);
     }
 
+    /**
+     * Helper method to set window characteristics
+     */
     private void setReplayCharacteristics() {
         setTitle("Replay Analysis");
         setVisible(true);
     }
 
+    /**
+     * EventBus subscription to button being pressed
+     * Note: method must be public for method to work
+     * TODO: Convert JButton to MenuButton
+     *  so this method is not called for every button pressed during a game
+     * @param button button that was pressed and sent over EventBus
+     */
     @Subscribe
     public void buttonEvent(JButton button) {
         // Construct GameBoard and begin playing!
@@ -90,6 +112,11 @@ public class Game extends JFrame {
         }
     }
 
+    /**
+     * EventBus Listener for EventBus
+     * Makes the replay screen
+     * @param replayFile replay file selected
+     */
     @Subscribe
     public void replaySelected(File replayFile) {
         getContentPane().remove(_menu);
