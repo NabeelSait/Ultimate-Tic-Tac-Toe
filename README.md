@@ -27,3 +27,6 @@ In File -> Project Structure -> Modules, change the language level to 12.
 
 ### Usage
 There is no CLI usage.
+
+## Nabeel Sait
+This project was a group project for an Object-Oriented Software Design course. I primarily worked on the implementations of the "game" portion of the application, both frontend and backend. 
